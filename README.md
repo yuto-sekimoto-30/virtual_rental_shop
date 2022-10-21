@@ -57,3 +57,7 @@
 # 画面遷移図
 
 https://www.figma.com/file/2esMKDIl8dpOWOSH6hROD9/Untitled?node-id=25%3A425
+
+# ER 図
+
+![ER図](ER図.png)
