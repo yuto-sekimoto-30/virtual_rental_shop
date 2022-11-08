@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= user.id %>
+  </td>
+  <td>
+    <%= user.name %>
+  </td>
+  <td>
+    <%= user.email %>
+  </td>
+  <td>
+    <%= l user.created_at, format: :long %>
+  </td>
+  <td>
+    <%= link_to t('.defaults.title'), edit_user_path(user) %>
+  </td>
+</tr>

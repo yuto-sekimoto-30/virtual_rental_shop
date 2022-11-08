@@ -1,0 +1,19 @@
+ja:
+  defaults:
+    login: "ログイン"
+    register: "新規登録"
+    logout: "ログアウト"
+    post: "投稿"
+    search_word: "検索ワード"
+    edit: "編集"
+    show: "詳細"
+    delete: "削除"
+  users:
+    new:
+      title: "アカウント作成"
+      to_login_page: "既にアカウントをお持ちならログイン"
+    create:
+      success: "ユーザー登録が完了しました"
+      fail: "ユーザー登録に失敗しました"
+    index:
+      title: "ユーザー一覧"
