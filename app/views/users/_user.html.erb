@@ -1,0 +1,14 @@
+<tr>
+  <td>
+  <%= image_tag user.avatar.url, class: "rounded-circle", size: '80x80' %>
+  </td>
+  <td class="align-middle">
+    <%= user.name %>
+  </td>
+  <td class="align-middle">
+    <%= "#{t 'defaults.bookmark_num'} #{5}" %>
+  </td>
+  <td class="align-middle">
+    <%= "⭐️" %>
+  </td>
+</tr>

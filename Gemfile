@@ -46,3 +46,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'sorcery'
+gem 'pry-rails'
+gem 'rails-i18n'
+gem 'bootstrap', '~> 4.4.1'
+gem 'font-awesome-sass'
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
+gem 'carrierwave'

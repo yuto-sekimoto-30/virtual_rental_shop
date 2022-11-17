@@ -1,0 +1,30 @@
+ja:
+  defaults:
+    login: "ログイン"
+    register: "新規登録"
+    logout: "ログアウト"
+    post: "投稿"
+    search_word: "検索ワード"
+    edit: "編集"
+    show: "詳細"
+    delete: "削除"
+    bookmark_num: "お気に入り数"
+    message:
+      created: "%{item}を作成しました"
+  users:
+    new:
+      title: "アカウント作成"
+      to_login_page: "既にアカウントをお持ちならログイン"
+    create:
+      success: "ユーザー登録が完了しました"
+      fail: "ユーザー登録に失敗しました"
+    index:
+      title: "ユーザー一覧"
+    show:
+      title: "ユーザー詳細"
+      profile: "ユーザープロフィール"
+    edit:
+      title: "ユーザー編集"
+    update:
+      success: "ユーザー情報を編集しました"
+      fail: "ユーザー情報の編集に失敗しました"
