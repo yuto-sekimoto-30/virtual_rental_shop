@@ -1,17 +1,12 @@
-<h1><%= t('.title') %></h1>
-<p>Find me in app/views/users/index.html.erb</p>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col"><%= User.human_attribute_name(:id) %></th>
-      <th scope="col"><%= User.human_attribute_name(:name) %></th>
-      <th scope="col"><%= User.human_attribute_name(:email) %></th>
-      <th scope="col"><%= User.human_attribute_name(:created_at) %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="col-10 offset-1">
+  <h3 class="col-4 offset-4 text-muted"><%= t '.title' %></h3>
+  <table class="table table-hover">
+    <tbody>
       <%= render @users%>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <div class="col-4 offset-4">
+    <%= paginate @users, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>
+

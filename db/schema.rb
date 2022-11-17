@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2022_11_01_105336) do
     t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"
-    t.string "image"
+    t.string "avatar"
     t.integer "role", default: 0, null: false
     t.text "introduction"
     t.datetime "created_at", precision: 6, null: false

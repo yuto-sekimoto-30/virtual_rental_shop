@@ -10,5 +10,6 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード確認"
+        avatar: "ユーザー画像"
         created_at: "作成日時"
         updated_at: "更新日時"
