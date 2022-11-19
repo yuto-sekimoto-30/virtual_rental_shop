@@ -9,6 +9,7 @@ ja:
     show: "詳細"
     delete: "削除"
     bookmark_num: "お気に入り数"
+    menu: "Menu"
     message:
       created: "%{item}を作成しました"
   users:
@@ -24,7 +25,7 @@ ja:
       title: "ユーザー詳細"
       profile: "ユーザープロフィール"
     edit:
-      title: "ユーザー編集"
+      title: "マイページ"
     update:
       success: "ユーザー情報を編集しました"
       fail: "ユーザー情報の編集に失敗しました"
