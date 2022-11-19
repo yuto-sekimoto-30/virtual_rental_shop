@@ -1,0 +1,30 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark mb-3">
+    <a class="navbar-brand" href="#"><%= image_tag "logo.png" %></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end mr-5" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= t 'defaults.menu' %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <% if logged_in? %>
+              <a class="dropdown-item" href="#"><%= t 'users.edit.title' %></a>
+              <a class="dropdown-item" href="#"><%= t 'users.index.title' %></a>
+              <a class="dropdown-item" href="#"><%= t 'ログアウト' %></a>
+            <% else %>
+              <a class="dropdown-item" href="#"><%= t 'users.new.title' %></a>
+              <a class="dropdown-item" href="#"><%= 'ログイン' %></a>
+            <% end %>
+          </div>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><i class="fa-solid fa-house"></i><span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
