@@ -1,2 +1,29 @@
 @import "bootstrap";
 @import "font-awesome";
+
+//フッター
+footer li {
+  border-right: 1px solid white;
+  padding-right: 4px;
+}
+footer li:last-child {
+  border: none;
+}
+footer .link {
+  text-decoration: none;
+  color: white ; 
+}
+footer {
+  margin-top: auto;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+footer {
+  margin-top: auto;
+}
+.wrap ol{
+  list-style:none;
+}
