@@ -10,6 +10,7 @@ ja:
     delete: "削除"
     bookmark_num: "お気に入り数"
     menu: "Menu"
+    copyright: "© 2022 Copyright"
     message:
       created: "%{item}を作成しました"
   users:
@@ -29,3 +30,8 @@ ja:
     update:
       success: "ユーザー情報を編集しました"
       fail: "ユーザー情報の編集に失敗しました"
+  pages:
+    terms:
+      title: "利用規約"
+    privacy_policy:
+      title: "プライバシーポリシー"

@@ -14,12 +14,13 @@
   </head>
 
   <body>
-  <%= render 'shared/header' %>
-    <div class="container text-center">
+    <%= render 'shared/header' %>
+    <div class="container text-center mb-5 mt-5">
       <div class="row">
         <%= render 'shared/flash_message' %>
         <%= yield %>
       </div>
     </div>
+    <%= render 'shared/footer' %>
   </body>
 </html>
