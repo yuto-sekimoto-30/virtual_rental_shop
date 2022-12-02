@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :require_login, only: %i[index show edit update]
 
   def index
     @users = User.all.page(params[:page])
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      auto_login(@user)
       redirect_to users_path, success: t('.success')
     else
       flash.now[:danger] = t '.fail'
