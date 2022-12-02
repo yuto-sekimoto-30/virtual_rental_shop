@@ -12,12 +12,9 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <% if logged_in? %>
-              <a class="dropdown-item" href="#"><%= t 'users.edit.title' %></a>
-              <a class="dropdown-item" href="#"><%= t 'users.index.title' %></a>
-              <a class="dropdown-item" href="#"><%= t 'ログアウト' %></a>
+              <%= render 'shared/logged_in' %>
             <% else %>
-              <a class="dropdown-item" href="#"><%= t 'users.new.title' %></a>
-              <a class="dropdown-item" href="#"><%= 'ログイン' %></a>
+              <%= render 'shared/logout' %>
             <% end %>
           </div>
         </li>

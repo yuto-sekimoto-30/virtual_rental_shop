@@ -13,6 +13,7 @@ ja:
     copyright: "© 2022 Copyright"
     message:
       created: "%{item}を作成しました"
+      require_login: "ログインしてください"
   users:
     new:
       title: "アカウント作成"
@@ -30,6 +31,37 @@ ja:
     update:
       success: "ユーザー情報を編集しました"
       fail: "ユーザー情報の編集に失敗しました"
+  user_sessions:
+    new:
+      title: "ログイン"
+      to_register_page: "アカウント作成へ"
+      password_forget: "パスワードをお忘れの場合はこちら"
+    create:
+      success: "ログインしました"
+      fail: "ログインに失敗しました"
+    destroy:
+      title: "ログアウト"
+      success: "ログアウトしました"
+  password_resets:
+    new:
+      title: "パスワードをお忘れの場合"
+      message: "登録済みのメールアドレス宛に、パスワード再設定用のURLを送信します"
+      submit: "送信する"
+      success: "メールを送信しました"
+    edit:
+      title: "パスワード再設定"
+      message: "新しいパスワードを設定してください"
+    create:
+      success: "パスワードリセット用のURLを送信しました"
+    update:
+      success: "パスワードを変更しました"
+      fail: "パスワードの変更に失敗しました"
+    done:
+      message: |
+        指定したメールアドレス宛に再設定用のURLを送信しました。
+        メールが届かない場合、メールアドレスが間違っている可能性があります。
+        再度メールを送信してください。
+      password_forget: "再送信する"
   pages:
     terms:
       title: "利用規約"
