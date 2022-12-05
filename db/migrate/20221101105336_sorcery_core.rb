@@ -6,12 +6,10 @@ class SorceryCore < ActiveRecord::Migration[6.1]
       t.string :crypted_password
       t.string :salt
       t.string :avatar
-      t.integer :role, null: false, default: 0
       t.text :introduction
 
 
       t.timestamps                null: false
     end
-    add_index :users, :email, unique: true
   end
 end
