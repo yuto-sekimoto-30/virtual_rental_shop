@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'login', to: 'user_sessions#new'  # 追記
   post 'login', to: 'user_sessions#create'  # 追記
   delete 'logout', to: 'user_sessions#destroy'  # 追記

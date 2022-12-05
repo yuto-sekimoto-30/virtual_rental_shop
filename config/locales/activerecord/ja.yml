@@ -2,7 +2,8 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
-      board: "掲示板"
+      admin_user: "管理者ユーザー"
+      comment: "管理者コメント"
     attributes:
       user:
         id: "ID"
@@ -11,5 +12,14 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード確認"
         avatar: "ユーザー画像"
+        introduction: "自己紹介"
+        created_at: "作成日時"
+        updated_at: "更新日時"
+      admin_user:
+        id: "ID"
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
         created_at: "作成日時"
         updated_at: "更新日時"
