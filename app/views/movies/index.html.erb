@@ -1,0 +1,169 @@
+<div class="row">
+  <div class="form mx-auto mb-4 col-6 d-flex justify-content-center">
+    <%= form_with url: movies_path, method: :get, class: "form-inline", local: true do |f| %>
+      <div class="form-group mr-1">
+        <%= f.text_field :name, class: 'form-control', placeholder: "タイトル" %>
+      </div>
+      <div class="form-group mr-1">
+        <%= f.select :genre, @genre_array, {include_blank: '---'}, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit t('defaults.search'), class: 'btn btn-outline-primary btn-block form-control' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="shelf col-12 mb-4">
+
+    <div class="row">
+      <% i = 0 %>
+      <%= while i < @search_movies.count do %>
+        <div class="col-6">
+          <div class="row">
+            <div class="first-blank col-2"></div>
+            <%= while i < @search_movies.count do %>
+              <% search_movie = @search_movies[i]['table']%>
+              <div class="movie col-1 mt-4 d-flex">
+              <div class="top"></div>
+                <div class="ftop pt-1">
+                  <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
+                  <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
+                  <%= disc %>
+                </div>
+                <div class="front d-flex align-items-center justify-content-center">
+                  <div class="title" hidden><%= search_movie['title']%></div>
+                  <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
+                  <div class="overview" hidden><%= search_movie['overview']%></div>
+                  <p class="ellipsis pt-5"><%= search_movie['title']%></p>
+                  <% if search_movie['poster_path'] %>
+                    <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
+                  <% else %>
+                    <img src="/assets/no_phone.jpg" class="card-img">
+                  <% end %>
+                </div>
+              </div>
+              <% i += 1 %>
+              <% break if i.modulo(10) == 0 %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="row">
+            <%= while i < @search_movies.count do %>
+              <% search_movie = @search_movies[i]['table']%>
+              <div class="movie col-1 mt-4 d-flex">
+              <div class="top"></div>
+                  <div class="ftop pt-1">
+                  <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
+                  <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
+                  <%= disc %>
+                </div>
+                <div class="front d-flex align-items-center justify-content-center">
+                  <div class="title" hidden><%= search_movie['title']%></div>
+                  <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
+                  <div class="overview" hidden><%= search_movie['overview']%></div>
+                  <p class="ellipsis pt-5"><%= search_movie['title']%></p>
+                  <% if search_movie['poster_path'] %>
+                    <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
+                  <% else %>
+                    <img src="/assets/no_phone.jpg" class="card-img">
+                  <% end %>
+                </div>
+              </div>
+              <% i += 1 %>
+              <% break if i.modulo(20) == 0 %>
+            <% end %>
+            <div class="last-blank col-2"></div>
+          </div>
+        </div>
+        <div class="line col-12"></div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <h3 class="col-12 mt-4"><span>人気急上昇中</span></h3>
+      <% i = 0 %>
+      <% 12.times do %>
+        <% movies_pop = @movies_pops[i]['table'] %>
+        <div class="front col-2 mt-5 style="width:50px">
+          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movies_pop['poster_path'], class: "card-img" %>
+          <div class="sena col-12"></div>
+          <div class="title" hidden><%= movies_pop['title']%></div>
+          <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{movies_pop['poster_path']}" %></div>
+          <div class="overview" hidden><%= movies_pop['overview']%></div>
+        </div>
+        <% i += 1 %>
+        <% if i == 6 %>
+          <div class="sen col-12"></div>
+        <% end %>
+      <% end %>
+      <div class="line col-12"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-container">
+  <div class="modal-body">
+    <div class="modal-close"><i class="fa fa-close"></i></div>
+    <div class="modal-content">
+      <div class="row">
+          <img src="" class="modal-left col-6 pt-5 pb-5 pl-5">
+          <div class="modal-right col-6 pt-5 pb-5 pr-5">
+            <h5 class="pb-3 mb-3"></h5>
+            <p class="mb-3"></p>
+            お気に入りに追加：<i class="fa-regular fa-thumbs-up"></i>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    var close = $('.modal-close');
+    var container = $('.modal-container');
+    var front = $('.front');
+
+    //開く
+    front.on('click',function(){	
+      container.addClass('active');
+      var title = $(this).children('.title').text();
+      var image = $(this).children('.image').text();
+      var overview = $(this).children('.overview').text();
+
+      if (image == "https://image.tmdb.org/t/p/w1280"){
+        image = "/assets/no_phone.jpg";
+      }
+      console.log(image);
+      if (!overview){
+        overview = "詳細不明";
+      }
+      $(container).find('img').attr('src', image);
+      $(container).find('h5').text(title);
+      $(container).find('p').text(overview);
+      
+      container.addClass('active');
+      return false;
+    });
+
+    //閉じる
+    close.on('click',function(){	
+      container.removeClass('active');
+    });
+
+    //画面外をクリックしたら閉じる
+    $(document).on('click',function(e) {
+      if(!$(e.target).closest('.modal-body').length) {
+        container.removeClass('active');
+      }
+    });
+  });
+</script>
+
+
+
+

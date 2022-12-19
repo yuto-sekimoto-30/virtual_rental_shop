@@ -8,6 +8,7 @@ ja:
     edit: "編集"
     show: "詳細"
     delete: "削除"
+    search: "検索"
     bookmark_num: "お気に入り数"
     menu: "Menu"
     copyright: "© 2022 Copyright"
@@ -67,3 +68,10 @@ ja:
       title: "利用規約"
     privacy_policy:
       title: "プライバシーポリシー"
+  movies:
+    index:
+      title: "映画一覧"
+    show:
+      title: "映画詳細"
+    search:
+      title: "映画検索"

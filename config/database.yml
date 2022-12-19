@@ -48,8 +48,14 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+# production:
+#   <<: *default
+#   database: virtual_rental_shop_production
+#   username: virtual_rental_shop
+#   password: <%= ENV['VIRTUAL_RENTAL_SHOP_DATABASE_PASSWORD'] %>
+
 production:
   <<: *default
-  database: virtual_rental_shop_production
-  username: virtual_rental_shop
-  password: <%= ENV['VIRTUAL_RENTAL_SHOP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
