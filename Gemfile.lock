@@ -400,6 +400,7 @@ DEPENDENCIES
   font-awesome-sass
   high_voltage
   jbuilder (~> 2.7)
+  jquery-rails
   kaminari
   letter_opener_web
   listen (~> 3.3)
