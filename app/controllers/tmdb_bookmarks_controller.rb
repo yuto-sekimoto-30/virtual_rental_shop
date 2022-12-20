@@ -1,4 +1,6 @@
 class TmdbBookmarksController < ApplicationController
+  before_action :require_login
+  
   def create
     TmdbBookmark.create!(user_id: current_user.id, tmdb_id: params[:tmdb_id])
     @tmdb_id = params[:tmdb_id]

@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :require_login, only: %i[show]
 
   require 'themoviedb-api'
   Tmdb::Api.key("a345acb42340ca68939f4c241dc52adb")
@@ -69,6 +70,8 @@ class MoviesController < ApplicationController
   
   def show
     @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)['table']
+    puts @movie['id']
+    puts "テスト"
     if @movie['poster_path'].blank?
       @movie['poster_path'] = "/assets/no_phone.jpg"
       puts @movie['poster_path']
