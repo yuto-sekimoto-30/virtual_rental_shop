@@ -1,1 +1,24 @@
-show画面
+<div class="col-10 offset-md-1">
+  <h3 class="col-4 offset-4 text-muted"><%= t '.title' %></h3>
+
+  <div class="row">
+  <div class="col-6 mb-4">
+    <%= image_tag @movie['poster_path'], class: "card-img" %>
+  </div>
+  <div class="col-6">
+    <div class="row">
+      <h5 class="col-12 pb-3 border-bottom"><%= @movie['title'] %></h5>
+      <p class="col-12"><%= @movie['overview'] %></p>
+      <p class="col-12">
+        お気に入りに追加：
+        <% unless TmdbBookmark.find_by(user_id: current_user.id, tmdb_id: @movie['id']) %>
+          <%= render 'tmdb_bookmarks/tmdb_unbookmark', tmdb_id: @movie['id'] %>
+        <% else %>
+         <%= render 'tmdb_bookmarks/tmdb_bookmark', tmdb_id: @movie['id'] %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+  </div>
+
+</div>

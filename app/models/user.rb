@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   mount_uploader :avatar, AvatarUploader
+  has_many :tmdb_bookmarks, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true

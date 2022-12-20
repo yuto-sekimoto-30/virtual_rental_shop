@@ -10,5 +10,8 @@
   <div class="col-4 offset-4 lead font-weight-bold">
     <%= @user.name %>
   </div>
+  <div class="col-4 offset-4 ">
+  <%= link_to t('users.edit.title'), edit_user_path(current_user), class: "navbar-brand" %>
+  </div>
 </div>
 

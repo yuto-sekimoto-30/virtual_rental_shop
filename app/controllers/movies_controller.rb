@@ -1,7 +1,14 @@
 class MoviesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   require 'themoviedb-api'
   Tmdb::Api.key("a345acb42340ca68939f4c241dc52adb")
   Tmdb::Api.language("ja")
+
+  def tmdb_id
+    tmdb_id = params[:tmdb_id]
+    render :json => tmdb_id
+  end
 
   def index
     #映画ジャンル取得
@@ -61,5 +68,13 @@ class MoviesController < ApplicationController
   end
   
   def show
+    @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)['table']
+    if @movie['poster_path'].blank?
+      @movie['poster_path'] = "/assets/no_phone.jpg"
+      puts @movie['poster_path']
+    else
+      @movie['poster_path'] = 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path']
+    end
+    @movie['overview'] = "詳細不明" if @movie['overview'].blank?
   end
 end

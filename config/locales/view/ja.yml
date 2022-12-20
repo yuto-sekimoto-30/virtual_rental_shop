@@ -25,10 +25,10 @@ ja:
     index:
       title: "ユーザー一覧"
     show:
-      title: "ユーザー詳細"
+      title: "マイページ"
       profile: "ユーザープロフィール"
     edit:
-      title: "マイページ"
+      title: "ユーザー編集"
     update:
       success: "ユーザー情報を編集しました"
       fail: "ユーザー情報の編集に失敗しました"
