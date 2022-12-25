@@ -1,0 +1,2 @@
+module TmdbCommentsHelper
+end

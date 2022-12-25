@@ -75,3 +75,9 @@ ja:
       title: "映画詳細"
     search:
       title: "映画検索"
+  relationships:
+    index:
+      title: "お気に入りユーザー"
+  tmdb_bookmarks:
+    index:
+      title: "お気に入り映画"

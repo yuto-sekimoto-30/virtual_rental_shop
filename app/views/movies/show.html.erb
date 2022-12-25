@@ -2,23 +2,50 @@
   <h3 class="col-4 offset-4 text-muted"><%= t '.title' %></h3>
 
   <div class="row">
-  <div class="col-6 mb-4">
-    <%= image_tag @movie['poster_path'], class: "card-img" %>
-  </div>
-  <div class="col-6">
-    <div class="row">
-      <h5 class="col-12 pb-3 border-bottom"><%= @movie['title'] %></h5>
-      <p class="col-12"><%= @movie['overview'] %></p></p>
-      <p class="col-12">
-        お気に入りに追加：
-        <% if TmdbBookmark.find_by(user_id: current_user.id, tmdb_id: @movie['id']) %>
-        <%= render 'tmdb_bookmarks/tmdb_bookmark', tmdb_id: @movie['id'] %>
-        <% else %>
-         <%= render 'tmdb_bookmarks/tmdb_unbookmark', tmdb_id: @movie['id'] %>
-        <% end %>
-      </p>
+    <div class="col-6 mb-4">
+      <%= image_tag @movie['poster_path'], class: "card-img" %>
     </div>
-  </div>
+    <div class="col-6">
+      <div class="row">
+        <h5 class="col-12 pb-3 border-bottom"><%= @movie['title'] %></h5>
+        <p class="col-12"><%= @movie['overview'] %></p></p>
+        <p class="col-12">
+          お気に入りに追加：
+          <% if TmdbBookmark.find_by(user_id: current_user.id, tmdb_id: @movie['id']) %>
+            <%= render 'tmdb_bookmarks/tmdb_bookmark', tmdb_id: @movie['id'] %>
+          <% else %>
+          <%= render 'tmdb_bookmarks/tmdb_unbookmark', tmdb_id: @movie['id'] %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+
+    <div class="tmdb_comments col-12 mt-5">
+      <div class="row">
+
+        <% @tmdb_comments.each do |tmdb_comment| %>
+          <div class="col-4">
+            <%= image_tag tmdb_comment.user.avatar.url, class: "rounded-circle", size: '80x80' %>
+            <p><%= tmdb_comment.user.name %></p>
+          </div>
+          <div class="col-8 mb-5 border d-flex align-items-center">
+            <p><%= tmdb_comment.comment %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form col-12">
+      <%= form_with url: movie_tmdb_comments_path(@movie['id']), scope: :tmdb_comment, method: :post, local: true do |f| %>
+        <div class="form-group col-12">
+          <%= f.text_area :comment, class: 'form-control', placeholder: "コメント", rows: "5" %>
+        </div>
+          <%= f.hidden_field :tmdb_id, :value => @movie['id'], class: 'form-control' %>
+        <div class="form-group col-12">
+          <%= f.submit 'コメントする', class: 'btn btn-primary btn-block' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
 </div>

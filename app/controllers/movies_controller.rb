@@ -70,8 +70,6 @@ class MoviesController < ApplicationController
   
   def show
     @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)['table']
-    puts @movie['id']
-    puts "テスト"
     if @movie['poster_path'].blank?
       @movie['poster_path'] = "/assets/no_phone.jpg"
       puts @movie['poster_path']
@@ -79,5 +77,7 @@ class MoviesController < ApplicationController
       @movie['poster_path'] = 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path']
     end
     @movie['overview'] = "詳細不明" if @movie['overview'].blank?
+
+    @tmdb_comments = TmdbComment.where(tmdb_id: @movie['id'])
   end
 end

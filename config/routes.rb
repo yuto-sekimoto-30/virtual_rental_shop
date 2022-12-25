@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :tmdb_bookmarks, only: %i[create destroy]
+  resources :relationships, only: %i[index create destroy]
+  resources :tmdb_bookmarks, only: %i[index create destroy]
+  resources :movies do
+    resources :tmdb_comments, only: %i[edit update create destroy]
+  end
   resources :movies, only: %i[index show create]
   post 'movies/tmdb_id', to: 'movies#tmdb_id'
   devise_for :admin_users, ActiveAdmin::Devise.config

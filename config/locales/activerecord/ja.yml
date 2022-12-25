@@ -12,7 +12,7 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード確認"
         avatar: "ユーザー画像"
-        introduction: "自己紹介"
+        introduction: "紹介文"
         created_at: "作成日時"
         updated_at: "更新日時"
       admin_user:
