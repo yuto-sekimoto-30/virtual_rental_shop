@@ -36,6 +36,7 @@
                   <div class="title" hidden><%= search_movie['title']%></div>
                   <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
                   <div class="overview" hidden><%= search_movie['overview']%></div>
+                  <div class="id" hidden><%= search_movie['id']%></div>
                   <p class="ellipsis pt-5"><%= search_movie['title']%></p>
                   <% if search_movie['poster_path'] %>
                     <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
@@ -65,6 +66,7 @@
                   <div class="title" hidden><%= search_movie['title']%></div>
                   <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
                   <div class="overview" hidden><%= search_movie['overview']%></div>
+                  <div class="id" hidden><%= search_movie['id']%></div>
                   <p class="ellipsis pt-5"><%= search_movie['title']%></p>
                   <% if search_movie['poster_path'] %>
                     <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
@@ -115,7 +117,7 @@
           <div class="modal-right col-6 pt-5 pb-5 pr-5">
             <h5 class="pb-3 mb-3"></h5>
             <p class="mb-3"></p>
-            お気に入りに追加：<i class="fa-regular fa-thumbs-up"></i>
+            <a href="" class="mb-3">詳細画面へ</a>
           </div>
       </div>
     </div>
@@ -130,24 +132,40 @@
 
     //開く
     front.on('click',function(){	
-      container.addClass('active');
-      var title = $(this).children('.title').text();
-      var image = $(this).children('.image').text();
-      var overview = $(this).children('.overview').text();
-
-      if (image == "https://image.tmdb.org/t/p/w1280"){
-        image = "/assets/no_phone.jpg";
-      }
-      console.log(image);
-      if (!overview){
-        overview = "詳細不明";
-      }
-      $(container).find('img').attr('src', image);
-      $(container).find('h5').text(title);
-      $(container).find('p').text(overview);
-      
-      container.addClass('active');
-      return false;
+      var id = $(this).children('.id').text();
+      $.when(
+        $.ajax({
+          url: "/movies/tmdb_id",
+          type: "POST",
+          data: { tmdb_id: id},
+          context: this,
+          success: function(tmdb_id){
+            id = tmdb_id
+          },
+          error: function(tmdb_id){
+            console.log("失敗")
+          }
+        })
+      ).done(function() {
+        console.log(id)
+        var title = $(this).children('.title').text();
+        var image = $(this).children('.image').text();
+        var overview = $(this).children('.overview').text();
+        if (image == "https://image.tmdb.org/t/p/w1280"){
+          image = "/assets/no_phone.jpg";
+        }
+        console.log(image);
+        if (!overview){
+          overview = "詳細不明";
+        }
+        $(container).find('img').attr('src', image);
+        $(container).find('h5').text(title);
+        $(container).find('p').text(overview);
+        $(container).find('a').attr("href", "movies/" + id)
+        
+        container.addClass('active');
+        return false;
+      });
     });
 
     //閉じる

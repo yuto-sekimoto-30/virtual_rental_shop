@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protected
   
   def not_authenticated
-    redirect_to login_path, danger: t('default.message.require_login')
+    redirect_to login_path, danger: t('defaults.message.require_login')
   end
 end

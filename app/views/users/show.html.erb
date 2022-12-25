@@ -2,7 +2,6 @@
   <h3 class="col-4 offset-4 text-muted"><%= t '.title' %></h3>
   <div class="col-4 offset-4 mb-4">
     <h5 class="text-muted d-inline"><%= t '.profile' %></h5>
-    <p class="d-inline lead float-right"><%= "⭐️" %></p>
   </div>
   <div class="col-4 offset-4">
     <%= image_tag @user.avatar.url, class: "rounded-circle", size: '200x200' %>
@@ -10,5 +9,13 @@
   <div class="col-4 offset-4 lead font-weight-bold">
     <%= @user.name %>
   </div>
+  <div class="col-4 offset-4 lead">
+    <%= @user.introduction %>
+  </div>
+  <% if params[:id].to_i == current_user.id %>
+    <div class="col-4 offset-4">
+      <%= link_to t('users.edit.title'), edit_user_path(current_user), class: "navbar-brand" %>
+    </div>
+  <% end %>
 </div>
 

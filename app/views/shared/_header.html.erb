@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark mb-3">
-    <a class="navbar-brand" href="#"><%= image_tag "logo.png" %></a>
+    <%= link_to image_tag("logo.png"), movies_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,7 +19,9 @@
           </div>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#"><i class="fa-solid fa-house"></i><span class="sr-only">(current)</span></a>
+          <%= link_to movies_path, class: "nav-link" do %>
+            <i class="fa-solid fa-house"></i>
+          <% end %>
         </li>
       </ul>
     </div>
