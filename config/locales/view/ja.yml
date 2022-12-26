@@ -1,5 +1,6 @@
 ja:
   defaults:
+    title: "仮想レンタルショップ"
     login: "ログイン"
     register: "新規登録"
     logout: "ログアウト"

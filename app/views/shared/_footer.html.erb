@@ -1,9 +1,7 @@
-<footer class="bg-dark text-center text-white">
-    <ul class="list-unstyled pb-2 pt-4">
-      <li class="d-inline"><%= link_to t('pages.terms.title'), page_path('terms'), {class: "link"} %></li>
-      <li class="d-inline"><%= link_to t('pages.privacy_policy.title'), page_path('privacy_policy'), {class: "link"}  %></li>
-    </ul>
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <%= t 'defaults.copyright' %>
-  </div>
+<footer class="text-center text-white">
+  <ul class="list-unstyled">
+    <li class="d-inline"><%= link_to t('pages.terms.title'), page_path('terms'), {class: "link"} %></li>
+    <li class="d-inline"><%= link_to t('pages.privacy_policy.title'), page_path('privacy_policy'), {class: "link"} %></li>
+    <li class="d-inline"><%= t 'defaults.copyright' %></li>
+  </ul>
 </footer>
