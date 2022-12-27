@@ -6,15 +6,16 @@ ja:
     logout: "ログアウト"
     post: "投稿"
     search_word: "検索ワード"
-    edit: "編集"
+    edit: "編集する"
     show: "詳細"
     delete: "削除"
     search: "検索"
-    bookmark_num: "お気に入り数"
+    bookmark: "お気に入り"
     menu: "Menu"
+    movie: "映画"
+    user: "ユーザー"
     copyright: "© 2022 Copyright"
     message:
-      created: "%{item}を作成しました"
       require_login: "ログインしてください"
   users:
     new:
@@ -27,7 +28,8 @@ ja:
       title: "ユーザー一覧"
     show:
       title: "マイページ"
-      profile: "ユーザープロフィール"
+      profile: "プロフィール"
+      to_edit: "編集画面へ"
     edit:
       title: "ユーザー編集"
     update:

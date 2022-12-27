@@ -1,9 +1,19 @@
 @import "bootstrap";
 @import "font-awesome";
+@import "users";
+@import "movies";
+@import "user_sessions";
+@import "password_resets";
+@import "relationships";
+@import "tmdb_bookmarks";
 
 body{
   background-image: url("/assets/digital.jpg");
   background-size: 100% 100%;
+}
+//利用規約,プライバシーポリシー
+.wrap{
+  color: white;
 }
 //ヘッダー
 header{
@@ -36,130 +46,3 @@ footer {
 .wrap ol{
   list-style:none;
 }
-
-//映画一覧画面
-.shelf{
-  background-image: url("/assets/black_grain.jpg");
-  box-shadow: 0 20px 40px 0 black;
-}
-.shelf .movie{
-  writing-mode: vertical-lr;
-  border-left: 10px solid black;
-  color: black;
-  height: 380px;
-  transform-style: preserve-3d; 
-  padding: 0;
-}
-.shelf .movie:hover{
-  transform: rotatex(-30deg);
-  transform-origin: bottom right;
-}
-.shelf .movie:hover .top{
-  background-color: white;
-  border-radius: 3px;
-  opacity: 0.5;
-  height: 100%;
-  width:100%;
-  height: 100px;
-  transform: perspective(400px) rotatex(50deg);
-  transform-origin: bottom;
-}
-.shelf .movie .front{
-  background-color: yellow;
-  background-repeat: no-repeat;
-  border-radius: 0 0 3px 3px;
-  background-size: cover;
-  background-position: center center;
-  height: 100%;
-  width:100%
-}
-.shelf .ftop{
-  writing-mode: horizontal-tb;
-  border-bottom: 1px solid black;
-  height: 35px;
-  border-radius: 3px 3px 0 0;
-  background-color: blue;
-  color: white;
-}
-
-.shelf .line{
-  background-image: url("/assets/black_grain.jpg");
-  border-top: 1px solid white;
-  border-bottom: 1px solid gray;
-  height: 10px;
-}
-.shelf span{
-  color: white;
-}
-.shelf .img{
-  height: 200px;
-}
-.shelf .sena{
-  border: 5px solid yellow;
-  transform   : perspective(300px)
-  rotateX(20deg);
-}
-.shelf p{
-  color: black;
-}
-.shelf .card{
-  border: 1px solid yellow;
-}
-.shelf .dvd{
-  border: 1px solid red;
-}
-.shelf .ellipsis {
-  height: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.modal-container{
-  position: fixed; 
-  top: 0;
-  left: 0;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-  box-sizing: border-box;
-  background-color: rgba(0,0,0,0.5);
-  visibility: hidden;
-  
-}
-.modal-body{
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-	height: 50%;
-}
-.modal-right{
-  font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
-  margin: 0;
-}
-.modal-container h5{
-  border-bottom: 1px solid black;
-}
-.modal-close{
-  color: white;
-  float: right;
-}
-.modal-close:hover{
-  cursor: pointer;
-}
-@keyframes rotate_anime {
-  0% {
-      transform:rotatey(-90deg);
-  }
-  100% {
-      transform:rotatey(0deg);
-  }
-}
-.modal-container.active{
-	opacity: 1;
-	visibility: visible;
-  animation:rotate_anime 1s;
-}
-.modal-container .fa-thumbs-up:hover{
-	cursor: pointer;
-}
-

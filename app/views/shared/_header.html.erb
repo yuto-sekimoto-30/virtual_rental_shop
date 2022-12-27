@@ -1,9 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light">
     <%= link_to movies_path, class: "navbar-brand" do %>
-      <img src="/assets/logo3.png">
+      <img src="/assets/logo.png">
     <% end %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" style="background-color: white;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -14,13 +14,24 @@
             <%= t 'defaults.menu' %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if logged_in? %>
-          <%= render 'shared/logged_in' %>
-        <% else %>
-          <%= render 'shared/logout' %>
-        <% end %>
+            <% if logged_in? %>
+              <%= render 'shared/logged_in' %>
+            <% else %>
+              <%= render 'shared/logout' %>
+            <% end %>
           </div>
         </li>
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-star"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to t('defaults.user'), relationships_path, class: 'dropdown-item'%>
+              <%= link_to t('defaults.movie'), tmdb_bookmarks_path, class: 'dropdown-item'%>
+            </div>
+          </li>
+        <% end %>
         <li class="nav-item">
           <%= link_to movies_path, class: "nav-link text-white" do %>
             <i class="fa-solid fa-house"></i>

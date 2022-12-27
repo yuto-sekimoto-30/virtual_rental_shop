@@ -1,14 +1,16 @@
-<div class="col-10 offset-1">
-  <h3 class="col-6 offset-3 text-muted"><%= t '.title' %></h3>
-  <div class="col-6 offset-3 mt-2">
-    <%= t '.message' %>
-  </div>
-  <div class="form col-6 offset-3 mt-5">
-    <%= form_with url:password_resets_path,method: :post,local: true do |f|%>
-      <div class="form-group">
-          <%=f.text_field :email,class: "form-control", placeholder: User.human_attribute_name(:email) %>
-      </div>
-      <%= f.submit t('.submit'), class:"btn btn-primary" %>
-    <%end%>
+<div class="row">
+  <div class="new col-6 offset-3">
+    <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h5>
+    <div class="col-12 mt-2">
+      <%= t '.message' %>
+    </div>
+    <div class="form col-12 mt-2 mb-3">
+      <%= form_with url:password_resets_path,method: :post,local: true do |f|%>
+        <div class="form-group">
+            <%=f.text_field :email,class: "form-control", placeholder: User.human_attribute_name(:email) %>
+        </div>
+        <%= f.submit t('.submit'), class:"btn btn-outline-primary col-12" %>
+      <%end%>
+    </div>
   </div>
 </div>

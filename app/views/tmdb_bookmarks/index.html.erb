@@ -1,18 +1,24 @@
-<div class="col-12">
-  <h3 class="col-4 offset-4 text-muted"><%= t '.title' %></h3>
-  <table class="table table-hover">
-    <tbody>
-      <% @movies.each do |movie| %>
-        <tr>
-          <td>
-          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'], class: "", style: "height: 200px;"%>
-          </td>
-          <td class="align-middle">
-            <%= movie['title'] %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="tmdb_bookmarks col-12">
+    <h3 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h3>
+    <table class="table table-hover">
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td>
+              <%= link_to movie_path(movie['id']) do %>
+                <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'], class: "", style: "height: 100px;"%>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= movie['title'] %>
+            </td>
+            <td class="align-middle">
+              <%= movie['overview'] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-

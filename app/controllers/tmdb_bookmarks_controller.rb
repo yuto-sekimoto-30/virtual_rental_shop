@@ -5,9 +5,17 @@ class TmdbBookmarksController < ApplicationController
   Tmdb::Api.language("ja")
 
   def index
-    @tmdb_bookmarks = current_user.tmdb_bookmarks
+    if !params[:user_id].blank?
+      user_id = params[:user_id] 
+    else
+      user_id = current_user.id
+    end
+    user = User.find(user_id)
+    @tmdb_bookmarks = user.tmdb_bookmarks
+    puts @tmdb_bookmarks.count
     @movies = []
     @tmdb_bookmarks.each do |tmdb_bookmark|
+      puts tmdb_bookmark.tmdb_id
       @movie = JSON.parse((Tmdb::Movie.detail(tmdb_bookmark.tmdb_id)).to_json)['table']
       @movies.push(@movie)
     end
