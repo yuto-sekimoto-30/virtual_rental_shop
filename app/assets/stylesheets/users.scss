@@ -1,3 +1,22 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.profile{
+  background-color: white;
+}
+.profile .email{
+  border-bottom: 1px solid black;
+}
+.user-index{
+  background-color: white;
+}
+.user-edit{
+  background-color: white;
+}
+.user-new{
+  background-color: white;
+}
+h5{
+  border-bottom: 1px solid black;
+}
+.profile img{
+  width: 100%;
+}
+

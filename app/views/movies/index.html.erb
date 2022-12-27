@@ -8,7 +8,7 @@
         <%= f.select :genre, @genre_array, {include_blank: '---'}, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.submit t('defaults.search'), class: 'btn btn-outline-primary btn-block form-control' %>
+        <%= f.submit t('defaults.search'), class: 'btn btn-purple-moon text-white btn-block form-control' %>
       </div>
     <% end %>
   </div>
@@ -86,20 +86,21 @@
     </div>
 
     <div class="row">
-      <h3 class="col-12 mt-4"><span>人気急上昇中</span></h3>
+      <h3 class="col-12 mt-4 mb-4"><span>人気急上昇中</span></h3>
       <% i = 0 %>
       <% 12.times do %>
         <% movies_pop = @movies_pops[i]['table'] %>
-        <div class="front col-2 mt-5 style="width:50px">
+        <div class="front col-2 style="width:50px">
           <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movies_pop['poster_path'], class: "card-img" %>
-          <div class="sena col-12"></div>
+          <div class="foundation col-12"></div>
           <div class="title" hidden><%= movies_pop['title']%></div>
           <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{movies_pop['poster_path']}" %></div>
           <div class="overview" hidden><%= movies_pop['overview']%></div>
+          <div class="id" hidden><%= movies_pop['id']%></div>
         </div>
         <% i += 1 %>
         <% if i == 6 %>
-          <div class="sen col-12"></div>
+          <div class="line mb-4 col-12"></div>
         <% end %>
       <% end %>
       <div class="line col-12"></div>
@@ -158,6 +159,7 @@
         if (!overview){
           overview = "詳細不明";
         }
+        console.log(title)
         $(container).find('img').attr('src', image);
         $(container).find('h5').text(title);
         $(container).find('p').text(overview);

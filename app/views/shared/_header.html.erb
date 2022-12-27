@@ -1,16 +1,19 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark mb-3">
-    <%= link_to image_tag("logo.png"), movies_path, class: "navbar-brand" %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <%= link_to movies_path, class: "navbar-brand" do %>
+      <img src="/assets/logo.png">
+    <% end %>
+    <button class="navbar-toggler" style="background-color: white;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end mr-5" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+
+    <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= t 'defaults.menu' %>
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= t 'defaults.menu' %>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <% if logged_in? %>
               <%= render 'shared/logged_in' %>
             <% else %>
@@ -18,8 +21,19 @@
             <% end %>
           </div>
         </li>
-        <li class="nav-item active">
-          <%= link_to movies_path, class: "nav-link" do %>
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-star"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to t('defaults.user'), relationships_path, class: 'dropdown-item'%>
+              <%= link_to t('defaults.movie'), tmdb_bookmarks_path, class: 'dropdown-item'%>
+            </div>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <%= link_to movies_path, class: "nav-link text-white" do %>
             <i class="fa-solid fa-house"></i>
           <% end %>
         </li>

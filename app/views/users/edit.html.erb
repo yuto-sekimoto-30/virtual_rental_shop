@@ -1,39 +1,41 @@
-<div class="col-10 offset-1">
-  <h3 class="col-4 offset-4 text-muted"><%= t '.title' %></h3>
-  <div class="form col-8 offset-2">
-    <%= form_with model: @user, local: true do |f| %>
-      <%= render 'shared/error_messages', {object: f.object} %>
-      <div class="form-group">
-        <div class="form-inline">
-          <%= f.label :name ,class: "col-4 small"%>
-          <%= f.text_field :name, class: 'form-control col-8' %>
+<div class="row">
+  <div class="user-edit col-6 offset-3">
+    <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h5>
+    <div class="form col-12">
+      <%= form_with model: @user, local: true do |f| %>
+        <%= render 'shared/error_messages', {object: f.object} %>
+        <div class="form-group">
+          <div class="form-inline">
+            <%= f.label :name ,class: "col-3 small"%>
+            <%= f.text_field :name, class: 'form-control col-9' %>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="form-inline">
-          <%= f.label :email, class: "col-4 small"%>
-          <%= f.email_field :email, class: 'form-control col-8' %>
+        <div class="form-group">
+          <div class="form-inline">
+            <%= f.label :email, class: "col-3 small"%>
+            <%= f.email_field :email, class: 'form-control col-9' %>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="form-inline">
-          <%= f.label :introduction, class: "col-4 small"%>
-          <%= f.text_field :introduction, class: 'form-control col-8' %>
+        <div class="form-group">
+          <div class="form-inline">
+            <%= f.label :introduction, class: "col-3 small"%>
+            <%= f.text_area :introduction, class: 'form-control col-9', maxlength: "30"%>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="form-inline">
-          <%= f.label :avatar ,class: "col-4 small"%>
-          <%= f.file_field :avatar, class: 'form-control col-8' %>
-          <%= f.hidden_field :avatar_cache %>
+        <div class="form-group">
+          <div class="form-inline">
+            <%= f.label :avatar ,class: "col-3 small"%>
+            <%= f.file_field :avatar, class: 'form-control col-9' %>
+            <%= f.hidden_field :avatar_cache %>
+          </div>
         </div>
-      </div>
-      <div class="avatar-image">
-        <%= image_tag @user.avatar.url, class: "rounded-circle mb-3", size: '200x200' if @user.avatar? %>
-      </div>
-      <div class="form-group col-4 offset-4">
-      <%= f.submit t('defaults.register'), class: 'btn btn-primary btn-block' %>
-      </div>
-    <% end %>
+        <div class="avatar-image">
+          <%= image_tag @user.avatar.url, class: "rounded-circle mb-3", size: '200x200' if @user.avatar? %>
+        </div>
+        <div class="form-group col-12">
+        <%= f.submit t('defaults.edit'), class: 'btn btn-outline-primary btn-block' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

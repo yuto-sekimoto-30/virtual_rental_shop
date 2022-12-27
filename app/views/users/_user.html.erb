@@ -1,11 +1,14 @@
 <tr>
   <td>
     <%= link_to user_path(user) do %>
-      <%= image_tag user.avatar.url, class: "rounded-circle", size: '80x80' %>
+      <%= image_tag user.avatar.url, class: "rounded-circle", size: '50x50' %>
     <% end %> 
   </td>
   <td class="align-middle">
-    <%= user.name %>
+      <%= user.name %>
+  </td>
+  <td class="align-middle">
+      <%= user.introduction %>
   </td>
   <td class="align-middle">
     <% if current_user.relationships.find_by(followed_id: user.id) %>
