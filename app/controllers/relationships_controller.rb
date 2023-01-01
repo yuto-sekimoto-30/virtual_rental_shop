@@ -2,7 +2,7 @@ class RelationshipsController < ApplicationController
   before_action :require_login, only: %i[create destroy]
   def index
     if !params[:user_id].blank?
-      user_id = params[:user_id] 
+      user_id = params[:user_id]
     else
       user_id = current_user.id
     end
@@ -13,15 +13,15 @@ class RelationshipsController < ApplicationController
       @users.push(User.find(relationship.followed_id))
     end
   end
-  
+
   def create
+    @followed_id = params[:followed_id]
     current_user.follow(params[:followed_id])
-    redirect_to request.referer
   end
 
   def destroy
+    @followed_id = Relationship.find(params[:id]).followed_id
     current_user.unfollow(Relationship.find(params[:id]).followed_id)
-    redirect_to request.referer  
   end
 
   private
