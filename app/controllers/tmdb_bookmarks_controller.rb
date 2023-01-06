@@ -6,7 +6,7 @@ class TmdbBookmarksController < ApplicationController
 
   def index
     if !params[:user_id].blank?
-      user_id = params[:user_id] 
+      user_id = params[:user_id]
     else
       user_id = current_user.id
     end
