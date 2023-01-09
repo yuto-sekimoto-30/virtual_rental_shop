@@ -63,5 +63,5 @@ production:
   <<: *default
   database: virtual_rental_shop_production
   username: root
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: toyu3007
   socket: /var/lib/mysql/mysql.sock
