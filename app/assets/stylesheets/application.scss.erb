@@ -8,7 +8,7 @@
 @import "tmdb_bookmarks";
 
 body{
-  background-image: url("/images/digital.jpg");
+  background-image: url(<%= asset_path "/assets/digital.jpg" %>);
   background-size: 100% 100%;
 }
 //利用規約,プライバシーポリシー
@@ -30,7 +30,7 @@ footer li:last-child {
 }
 footer .link {
   text-decoration: none;
-  color: white ; 
+  color: white ;
 }
 footer {
   margin-top: auto;
