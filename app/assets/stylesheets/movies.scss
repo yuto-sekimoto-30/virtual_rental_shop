@@ -11,7 +11,7 @@
   transform: translate3d(0, 5px, 0);
 }
 .shelf{
-  background-image: url("/assets/black_grain.jpg");
+  background-image: image-url('black_grain.jpg');
   box-shadow: 0 20px 40px 0 black;
 }
 .shelf .movie{
@@ -55,7 +55,7 @@
 }
 
 .shelf .line{
-  background-image: url("/assets/black_grain.jpg");
+  background-image: image-url('black_grain.jpg');
   border-top: 1px solid white;
   border-bottom: 1px solid gray;
   height: 10px;
@@ -79,7 +79,7 @@
   text-overflow: ellipsis;
 }
 .modal-container{
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
 	width: 100%;
@@ -136,7 +136,6 @@
 }
 .show-movie h5{
   border-bottom: 1px solid #F2F2F2;
-  
 }
 .show-movie .tmdb_comments{
   border-top: 1px solid #F2F2F2;
