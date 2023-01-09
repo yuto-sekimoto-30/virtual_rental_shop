@@ -71,7 +71,7 @@ class MoviesController < ApplicationController
   def show
     @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)['table']
     if @movie['poster_path'].blank?
-      @movie['poster_path'] = "/assets/no_phone.jpg"
+      @movie['poster_path'] = "no_phone.jpg"
     else
       @movie['poster_path'] = 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path']
     end
