@@ -27,7 +27,6 @@ development:
 test:
   <<: *default
   database: virtual_rental_shop_test
-
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -54,8 +53,15 @@ test:
 #   username: virtual_rental_shop
 #   password: <%= ENV['VIRTUAL_RENTAL_SHOP_DATABASE_PASSWORD'] %>
 
+# production:
+#   <<: *default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: 5
+
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  database: virtual_rental_shop_production
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
