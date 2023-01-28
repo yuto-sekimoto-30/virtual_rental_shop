@@ -1,6 +1,8 @@
 class MoviesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :require_login, only: %i[show]
+  before_action :get_genre_array, only: %i[index]
+  before_action :get_popular_movies, only: %i[index]
 
   require 'themoviedb-api'
   Tmdb::Api.key("a345acb42340ca68939f4c241dc52adb")
@@ -12,20 +14,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #映画ジャンル取得
-    @genre_array = []
-    genre = JSON.parse((Tmdb::Genre.movie_list).to_json)
-    i = 0
-    genre.count.times do
-      @genre_array.push genre[i]['table'].values.reverse
-      i += 1
-    end
-
-    #人気映画取得
-    @popular_movies = JSON.parse(Tmdb::Movie.popular.to_json)['table']['results']
-
     #映画情報取得
-    search = false
     @search_movies = []
     if !params[:name].blank? && !params[:type].blank? #検索された場合
       if params[:type] == "1" #映画名が選択された場合
@@ -33,13 +22,12 @@ class MoviesController < ApplicationController
         JSON.parse((Tmdb::Search.movie(params[:name])).to_json)['table']['total_pages'].times do
           @search_movies += JSON.parse((Tmdb::Search.movie(params[:name], page: "#{i}")).to_json)['table']['results']
           i += 1
-          break if i > 6 # 120タイトル取得
+          break if i > 6 # 20×6タイトルまで取得
         end
       elsif params[:type] == "2" #人物名が選択された場合
         person_id = JSON.parse((Tmdb::Search.person(params[:name])).to_json)['table']['results'][0]['table']['id']
         @search_movies = JSON.parse((Tmdb::Person.movie_credits(person_id)).to_json)['table']['cast']
       end
-      search = true
     else #検索パラメーターがない場合
       ('A'..'Z').to_a.shuffle[0..5].each do |random_chara| #ランダムで120タイトル取得
         total_pages = JSON.parse((Tmdb::Search.movie(random_chara)).to_json)['table']['total_pages']
@@ -48,10 +36,9 @@ class MoviesController < ApplicationController
       @search_movies.shuffle!
     end
 
-    #ジャンルが選択されていた場合
+    #ジャンルが選択されていた場合にジャンルで絞る
     if !params[:genre].blank?
       @search_movies.delete_if do |search_movie|
-        #更にジャンルで絞る
         !search_movie['table']['genre_ids'].include?(params[:genre].to_i)
       end
     end
@@ -69,4 +56,22 @@ class MoviesController < ApplicationController
     @movie['overview'] = "詳細不明" if @movie['overview'].blank?
     @tmdb_comments = TmdbComment.where(tmdb_id: @movie['id'])
   end
+
+  private
+    #フォームで使用する映画ジャンル取得
+    def get_genre_array
+      @genre_array = []
+      genre = JSON.parse((Tmdb::Genre.movie_list).to_json)
+      i = 0
+      genre.count.times do
+        @genre_array.push genre[i]['table'].values.reverse
+        i += 1
+      end
+    end
+
+    #人気急上昇中の映画一覧を取得
+    def get_popular_movies
+      #人気映画取得
+      @popular_movies = JSON.parse(Tmdb::Movie.popular.to_json)['table']['results']
+    end
 end
