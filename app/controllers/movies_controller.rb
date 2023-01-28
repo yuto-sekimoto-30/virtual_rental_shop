@@ -28,7 +28,6 @@ class MoviesController < ApplicationController
     search = false
     @search_movies = []
     if !params[:name].blank? && !params[:type].blank? #検索された場合
-      person_id = 0
       if params[:type] == "1" #映画名が選択された場合
         i = 1
         JSON.parse((Tmdb::Search.movie(params[:name])).to_json)['table']['total_pages'].times do
@@ -68,7 +67,6 @@ class MoviesController < ApplicationController
     end
     @movie['backdrop_path'] = 'https://image.tmdb.org/t/p/w1280' + @movie['backdrop_path'] if !@movie['backdrop_path'].blank?
     @movie['overview'] = "詳細不明" if @movie['overview'].blank?
-
     @tmdb_comments = TmdbComment.where(tmdb_id: @movie['id'])
   end
 end
