@@ -1,8 +1,11 @@
 <div class="row">
-  <div class="form mx-auto mb-4 col-6 d-flex justify-content-center">
+  <div class="form mx-auto mb-4 col-8 d-flex justify-content-center">
     <%= form_with url: movies_path, method: :get, class: "form-inline", local: true do |f| %>
       <div class="form-group mr-1">
-        <%= f.text_field :name, class: 'form-control', placeholder: "タイトル" %>
+        <%= f.text_field :name, class: 'form-control', placeholder: "タイトル", required: true %>
+      </div>
+      <div class="form-group mr-1">
+        <%= f.select :type, [["映画名", 1], ["人物名(英語)", 2]], {include_blank: '---'}, class: 'form-control', required: true %>
       </div>
       <div class="form-group mr-1">
         <%= f.select :genre, @genre_array, {include_blank: '---'}, class: 'form-control' %>
@@ -89,14 +92,14 @@
       <h3 class="col-12 mt-4 mb-4"><span>人気急上昇中</span></h3>
       <% i = 0 %>
       <% 12.times do %>
-        <% movies_pop = @movies_pops[i]['table'] %>
+        <% popular_movie = @popular_movies[i]['table'] %>
         <div class="front col-2 style="width:50px">
-          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movies_pop['poster_path'], class: "card-img" %>
+          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + popular_movie['poster_path'], class: "card-img" %>
           <div class="foundation col-12"></div>
-          <div class="title" hidden><%= movies_pop['title']%></div>
-          <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{movies_pop['poster_path']}" %></div>
-          <div class="overview" hidden><%= movies_pop['overview']%></div>
-          <div class="id" hidden><%= movies_pop['id']%></div>
+          <div class="title" hidden><%= popular_movie['title']%></div>
+          <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{popular_movie['poster_path']}" %></div>
+          <div class="overview" hidden><%= popular_movie['overview']%></div>
+          <div class="id" hidden><%= popular_movie['id']%></div>
         </div>
         <% i += 1 %>
         <% if i == 6 %>
