@@ -1,90 +1,98 @@
+<%= javascript_pack_tag 'movies/index' %>
 <div class="row">
   <div class="form mx-auto mb-4 col-8 d-flex justify-content-center">
     <%= form_with url: movies_path, method: :get, class: "form-inline", local: true do |f| %>
       <div class="form-group mr-1">
-        <%= f.text_field :name, class: 'form-control', placeholder: "タイトル", required: true %>
+        <%= f.text_field :name, class: 'form-control', placeholder: "タイトル", required: true, value: @name %>
       </div>
       <div class="form-group mr-1">
-        <%= f.select :type, [["映画名", 1], ["人物名(英語)", 2]], {include_blank: '---'}, class: 'form-control', required: true %>
+        <%= f.select :type, [["映画名", 1], ["人物名(英語)", 2]], {selected: @type}, class: 'form-control', required: true %>
       </div>
       <div class="form-group mr-1">
-        <%= f.select :genre, @genre_array, {include_blank: '---'}, class: 'form-control' %>
+        <%= f.select :genre, @genre_array, {include_blank: 'ジャンル選択', selected: @genre}, class: 'form-control' %>
       </div>
       <div class="form-group">
         <%= f.submit t('defaults.search'), class: 'btn btn-purple-moon text-white btn-block form-control' %>
       </div>
     <% end %>
   </div>
+  <div>
+    <%= link_to "ランダム表示", root_path, class: "btn btn-purple-moon text-white btn-block" %>
+  </div>
 </div>
 
 <div class="row">
   <div class="shelf col-12 mb-4">
-
     <div class="row">
-      <% i = 0 %>
-      <%= while i < @search_movies.count do %>
-        <div class="col-6">
-          <div class="row">
-            <div class="first-blank col-2"></div>
-            <%= while i < @search_movies.count do %>
-              <% search_movie = @search_movies[i]['table']%>
-              <div class="movie col-1 mt-4 d-flex">
-              <div class="top"></div>
-                <div class="ftop pt-1">
-                  <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                  <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
-                  <%= disc %>
-                </div>
-                <div class="front d-flex align-items-center justify-content-center">
-                  <div class="title" hidden><%= search_movie['title']%></div>
-                  <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
-                  <div class="overview" hidden><%= search_movie['overview']%></div>
-                  <div class="id" hidden><%= search_movie['id']%></div>
-                  <p class="ellipsis pt-5"><%= search_movie['title']%></p>
-                  <% if search_movie['poster_path'] %>
-                    <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
-                  <% else %>
-                    <%= image_tag asset_path("no_phone.jpg"), class: "card-img" %>
-                  <% end %>
-                </div>
-              </div>
-              <% i += 1 %>
-              <% break if i.modulo(10) == 0 %>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="col-6">
-          <div class="row">
-            <%= while i < @search_movies.count do %>
-              <% search_movie = @search_movies[i]['table']%>
-              <div class="movie col-1 mt-4 d-flex">
-              <div class="top"></div>
+      <% if @search_movies.empty? %>
+        <h3 class="col-12 mt-4 mb-4"><span>検索結果なし</span></h3>
+        <div class="line mb-4 col-12"></div>
+      <% else %>
+        <% i = 0 %>
+        <%= while i < @search_movies.count do %>
+          <div class="col-6">
+            <div class="row">
+              <div class="first-blank col-2"></div>
+              <%= while i < @search_movies.count do %>
+                <% search_movie = @search_movies[i]['table']%>
+                <div class="movie col-1 mt-4 d-flex">
+                <div class="top"></div>
                   <div class="ftop pt-1">
-                  <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                  <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
-                  <%= disc %>
+                    <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
+                    <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
+                    <%= disc %>
+                  </div>
+                  <div class="front d-flex align-items-center justify-content-center">
+                    <div class="title" hidden><%= search_movie['title']%></div>
+                    <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
+                    <div class="overview" hidden><%= search_movie['overview']%></div>
+                    <div class="id" hidden><%= search_movie['id']%></div>
+                    <p class="ellipsis pt-5"><%= search_movie['title']%></p>
+                    <% if search_movie['poster_path'] %>
+                      <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
+                    <% else %>
+                      <%= image_tag asset_path("no_phone.jpg"), class: "card-img" %>
+                    <% end %>
+                  </div>
                 </div>
-                <div class="front d-flex align-items-center justify-content-center">
-                  <div class="title" hidden><%= search_movie['title']%></div>
-                  <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
-                  <div class="overview" hidden><%= search_movie['overview']%></div>
-                  <div class="id" hidden><%= search_movie['id']%></div>
-                  <p class="ellipsis pt-5"><%= search_movie['title']%></p>
-                  <% if search_movie['poster_path'] %>
-                    <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
-                  <% else %>
-                    <img src="/assets/no_phone.jpg" class="card-img">
-                  <% end %>
-                </div>
-              </div>
-              <% i += 1 %>
-              <% break if i.modulo(20) == 0 %>
-            <% end %>
-            <div class="last-blank col-2"></div>
+                <% i += 1 %>
+                <% break if i.modulo(10) == 0 %>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <div class="line col-12"></div>
+
+          <div class="col-6">
+            <div class="row">
+              <%= while i < @search_movies.count do %>
+                <% search_movie = @search_movies[i]['table']%>
+                <div class="movie col-1 mt-4 d-flex">
+                <div class="top"></div>
+                    <div class="ftop pt-1">
+                    <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
+                    <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
+                    <%= disc %>
+                  </div>
+                  <div class="front d-flex align-items-center justify-content-center">
+                    <div class="title" hidden><%= search_movie['title']%></div>
+                    <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
+                    <div class="overview" hidden><%= search_movie['overview']%></div>
+                    <div class="id" hidden><%= search_movie['id']%></div>
+                    <p class="ellipsis pt-5"><%= search_movie['title']%></p>
+                    <% if search_movie['poster_path'] %>
+                      <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
+                    <% else %>
+                      <img src="/assets/no_phone.jpg" class="card-img">
+                    <% end %>
+                  </div>
+                </div>
+                <% i += 1 %>
+                <% break if i.modulo(20) == 0 %>
+              <% end %>
+              <div class="last-blank col-2"></div>
+            </div>
+          </div>
+          <div class="line col-12"></div>
+        <% end %>
       <% end %>
     </div>
 
@@ -128,64 +136,6 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $(function(){
-    var close = $('.modal-close');
-    var container = $('.modal-container');
-    var front = $('.front');
-
-    //開く
-    front.on('click',function(){	
-      var id = $(this).children('.id').text();
-      $.when(
-        $.ajax({
-          url: "/movies/tmdb_id",
-          type: "POST",
-          data: { tmdb_id: id},
-          context: this,
-          success: function(tmdb_id){
-            id = tmdb_id
-          },
-          error: function(tmdb_id){
-            console.log("失敗")
-          }
-        })
-      ).done(function() {
-        console.log(id)
-        var title = $(this).children('.title').text();
-        var image = $(this).children('.image').text();
-        var overview = $(this).children('.overview').text();
-        if (image == "https://image.tmdb.org/t/p/w1280"){
-          image = "/assets/no_phone.jpg";
-        }
-        console.log(image);
-        if (!overview){
-          overview = "詳細不明";
-        }
-        console.log(title)
-        $(container).find('img').attr('src', image);
-        $(container).find('h5').text(title);
-        $(container).find('p').text(overview);
-        $(container).find('a').attr("href", "movies/" + id)
-
-        container.addClass('active');
-        return false;
-      });
-    });
-
-    //閉じる
-    close.on('click',function(){	
-      container.removeClass('active');
-    });
-
-    //画面外をクリックしたら閉じる
-    $(document).on('click',function(e) {
-      if(!$(e.target).closest('.modal-body').length) {
-        container.removeClass('active');
-      }
-    });
-  });
-</script>
 
 
 

@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
   before_action :require_login, only: %i[show]
   before_action :get_genre_array, only: %i[index]
   before_action :get_popular_movies, only: %i[index]
+  before_action :set_form, only: %i[index]
 
   require 'themoviedb-api'
   Tmdb::Api.key("a345acb42340ca68939f4c241dc52adb")
@@ -25,8 +26,10 @@ class MoviesController < ApplicationController
           break if i > 6 # 20×6タイトルまで取得
         end
       elsif params[:type] == "2" #人物名が選択された場合
-        person_id = JSON.parse((Tmdb::Search.person(params[:name])).to_json)['table']['results'][0]['table']['id']
-        @search_movies = JSON.parse((Tmdb::Person.movie_credits(person_id)).to_json)['table']['cast']
+        person_id = JSON.parse((Tmdb::Search.person(params[:name])).to_json)
+        if !(person_id['table']['total_pages'].to_i == 0)
+          @search_movies = JSON.parse((Tmdb::Person.movie_credits(person_id['table']['results'][0]['table']['id'])).to_json)['table']['cast']
+        end
       end
     else #検索パラメーターがない場合
       ('A'..'Z').to_a.shuffle[0..5].each do |random_chara| #ランダムで120タイトル取得
@@ -42,7 +45,6 @@ class MoviesController < ApplicationController
         !search_movie['table']['genre_ids'].include?(params[:genre].to_i)
       end
     end
-
   end
 
   def show
@@ -73,5 +75,12 @@ class MoviesController < ApplicationController
     def get_popular_movies
       #人気映画取得
       @popular_movies = JSON.parse(Tmdb::Movie.popular.to_json)['table']['results']
+    end
+
+    #フォーム初期値設定
+    def set_form
+      @name = params[:name] || ""
+      @type = params[:type] || 1
+      @genre = params[:genre] || ""
     end
 end
