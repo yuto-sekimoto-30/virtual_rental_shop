@@ -74,6 +74,12 @@ ja:
   movies:
     index:
       title: "映画一覧"
+      no_search: "検索結果なし"
+      form_name: "タイトル"
+      form_genre: "ジャンル選択"
+      form_link: "ランダム表示"
+      modal_link: "詳細画面へ"
+      popular_title: "人気急上昇中"
     show:
       title: "映画詳細"
     search:

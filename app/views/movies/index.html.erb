@@ -1,35 +1,21 @@
+<% if false %>JavaScript読み込み<% end %>
 <%= javascript_pack_tag 'movies/index' %>
-<div class="row">
-  <div class="form mx-auto mb-4 col-8 d-flex justify-content-center">
-    <%= form_with url: movies_path, method: :get, class: "form-inline", local: true do |f| %>
-      <div class="form-group mr-1">
-        <%= f.text_field :name, class: 'form-control', placeholder: "タイトル", required: true, value: @name %>
-      </div>
-      <div class="form-group mr-1">
-        <%= f.select :type, [["映画名", 1], ["人物名(英語)", 2]], {selected: @type}, class: 'form-control', required: true %>
-      </div>
-      <div class="form-group mr-1">
-        <%= f.select :genre, @genre_array, {include_blank: 'ジャンル選択', selected: @genre}, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.submit t('defaults.search'), class: 'btn btn-purple-moon text-white btn-block form-control' %>
-      </div>
-    <% end %>
-  </div>
-  <div>
-    <%= link_to "ランダム表示", root_path, class: "btn btn-purple-moon text-white btn-block" %>
-  </div>
-</div>
+<% if false %>form読み込み<% end %>
+<%= render 'movies/form' %>
 
 <div class="row">
   <div class="shelf col-12 mb-4">
+    <% if false %>検索結果一覧表示<% end %>
     <div class="row">
+      <% if false %>検索結果がない場合<% end %>
       <% if @search_movies.empty? %>
-        <h3 class="col-12 mt-4 mb-4"><span>検索結果なし</span></h3>
+        <h3 class="col-12 mt-4 mb-4"><span><%= t('.no_search') %></span></h3>
         <div class="line mb-4 col-12"></div>
-      <% else %>
+      <% else %><% if false %>検索結果がある場合<% end %>
+
         <% i = 0 %>
         <%= while i < @search_movies.count do %>
+          <% if false %>検索結果の左側表示<% end %>
           <div class="col-6">
             <div class="row">
               <div class="first-blank col-2"></div>
@@ -39,8 +25,7 @@
                 <div class="top"></div>
                   <div class="ftop pt-1">
                     <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                    <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
-                    <%= disc %>
+                    <%= "BD" %>
                   </div>
                   <div class="front d-flex align-items-center justify-content-center">
                     <div class="title" hidden><%= search_movie['title']%></div>
@@ -61,6 +46,7 @@
             </div>
           </div>
 
+          <% if false %>検索結果の右側表示<% end %>
           <div class="col-6">
             <div class="row">
               <%= while i < @search_movies.count do %>
@@ -69,8 +55,7 @@
                 <div class="top"></div>
                     <div class="ftop pt-1">
                     <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                    <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
-                    <%= disc %>
+                    <%= "BD" %>
                   </div>
                   <div class="front d-flex align-items-center justify-content-center">
                     <div class="title" hidden><%= search_movie['title']%></div>
@@ -91,23 +76,23 @@
               <div class="last-blank col-2"></div>
             </div>
           </div>
+
           <div class="line col-12"></div>
         <% end %>
       <% end %>
     </div>
 
+    <% if false %>人気映画表示<% end %>
     <div class="row">
-      <h3 class="col-12 mt-4 mb-4"><span>人気急上昇中</span></h3>
+      <h3 class="col-12 mt-4 mb-4"><span><%= t('.popular_title') %></span></h3>
       <% i = 0 %>
       <% 12.times do %>
         <% popular_movie = @popular_movies[i]['table'] %>
         <div class="front col-2 style="width:50px">
           <%= image_tag 'https://image.tmdb.org/t/p/w1280' + popular_movie['poster_path'], class: "card-img" %>
           <div class="foundation col-12"></div>
-          <div class="title" hidden><%= popular_movie['title']%></div>
-          <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{popular_movie['poster_path']}" %></div>
-          <div class="overview" hidden><%= popular_movie['overview']%></div>
-          <div class="id" hidden><%= popular_movie['id']%></div>
+          <% if false %>JavaScriptで利用する隠し要素読み込み<% end %>
+          <%= render 'movies/hidden',movie: popular_movie %>
         </div>
         <% i += 1 %>
         <% if i == 6 %>
@@ -120,23 +105,5 @@
   </div>
 </div>
 
-<div class="modal-container">
-  <div class="modal-body">
-    <div class="modal-close"><i class="fa fa-close"></i></div>
-    <div class="modal-content">
-      <div class="row">
-          <img src="" class="modal-left col-6 pt-5 pb-5 pl-5">
-          <div class="modal-right col-6 pt-5 pb-5 pr-5">
-            <h5 class="pb-3 mb-3"></h5>
-            <p class="mb-3"></p>
-            <a href="" class="mb-3">詳細画面へ</a>
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
+<% if false %>モーダル読み込み<% end %>
+<%= render 'movies/modal' %>

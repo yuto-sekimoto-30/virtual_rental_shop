@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="form mx-auto mb-4 col-8 d-flex justify-content-center">
+    <%= form_with url: movies_path, method: :get, class: "form-inline", local: true do |f| %>
+      <div class="form-group mr-1">
+        <%= f.text_field :name, class: 'form-control', placeholder: t('movies.index.form_name'), required: true, value: @name %>
+      </div>
+      <div class="form-group mr-1">
+        <%= f.select :type, [["映画名", 1], ["人物名(英語)", 2]], {selected: @type}, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group mr-1">
+        <%= f.select :genre, @genre_array, {include_blank: t('movies.index.form_genre'), selected: @genre}, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit t('defaults.search'), class: 'btn btn-purple-moon text-white btn-block form-control' %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to t('movies.index.form_link'), root_path, class: "btn btn-purple-moon text-white btn-block" %>
+  </div>
+</div>
