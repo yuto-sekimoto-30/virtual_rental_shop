@@ -1,102 +1,65 @@
-<div class="row">
-  <div class="form mx-auto mb-4 col-6 d-flex justify-content-center">
-    <%= form_with url: movies_path, method: :get, class: "form-inline", local: true do |f| %>
-      <div class="form-group mr-1">
-        <%= f.text_field :name, class: 'form-control', placeholder: "タイトル" %>
-      </div>
-      <div class="form-group mr-1">
-        <%= f.select :genre, @genre_array, {include_blank: '---'}, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.submit t('defaults.search'), class: 'btn btn-purple-moon text-white btn-block form-control' %>
-      </div>
-    <% end %>
-  </div>
-</div>
+<% if false %>JavaScript読み込み<% end %>
+<%= javascript_pack_tag 'movies/index' %>
+<% if false %>form読み込み<% end %>
+<%= render 'movies/form' %>
 
 <div class="row">
   <div class="shelf col-12 mb-4">
-
+    <% if false %>検索結果一覧表示<% end %>
     <div class="row">
-      <% i = 0 %>
-      <%= while i < @search_movies.count do %>
-        <div class="col-6">
-          <div class="row">
-            <div class="first-blank col-2"></div>
-            <%= while i < @search_movies.count do %>
-              <% search_movie = @search_movies[i]['table']%>
-              <div class="movie col-1 mt-4 d-flex">
-              <div class="top"></div>
-                <div class="ftop pt-1">
-                  <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                  <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
-                  <%= disc %>
-                </div>
-                <div class="front d-flex align-items-center justify-content-center">
-                  <div class="title" hidden><%= search_movie['title']%></div>
-                  <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
-                  <div class="overview" hidden><%= search_movie['overview']%></div>
-                  <div class="id" hidden><%= search_movie['id']%></div>
-                  <p class="ellipsis pt-5"><%= search_movie['title']%></p>
-                  <% if search_movie['poster_path'] %>
-                    <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
-                  <% else %>
-                    <%= image_tag asset_path("no_phone.jpg"), class: "card-img" %>
-                  <% end %>
-                </div>
-              </div>
-              <% i += 1 %>
-              <% break if i.modulo(10) == 0 %>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="col-6">
-          <div class="row">
-            <%= while i < @search_movies.count do %>
-              <% search_movie = @search_movies[i]['table']%>
-              <div class="movie col-1 mt-4 d-flex">
-              <div class="top"></div>
+      <% if false %>検索結果がない場合<% end %>
+      <% if @search_movies.empty? %>
+        <h3 class="col-12 mt-4 mb-4"><span><%= t('.no_search') %></span></h3>
+        <div class="line mb-4 col-12"></div>
+      <% else %><% if false %>検索結果がある場合<% end %>
+        <% i = 0 %>
+        <%= while i < @search_movies.count do %>
+          <div class="col-6 sample">
+            <div class="row">
+              <% 12.times do %>
+                <% break if @search_movies[i].blank? %>
+                <% search_movie = @search_movies[i]['table']%>
+                <div class="movie col-1 mt-4 d-flex">
+                <div class="top"></div>
                   <div class="ftop pt-1">
-                  <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                  <% disc = release_date.to_date >= "2008-01-01".to_date ? "BD" : "DVD" %>
-                  <%= disc %>
+                    <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
+                    <%= "BD" %>
+                  </div>
+                  <div class="front d-flex align-items-center justify-content-center">
+                    <div class="title" hidden><%= search_movie['title']%></div>
+                    <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
+                    <div class="overview" hidden><%= search_movie['overview']%></div>
+                    <div class="id" hidden><%= search_movie['id']%></div>
+                    <p class="ellipsis pt-5"><%= search_movie['title']%></p>
+                    <% if search_movie['poster_path'] %>
+                      <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
+                    <% else %>
+                      <%= image_tag asset_path("no_phone.jpg"), class: "card-img" %>
+                    <% end %>
+                  </div>
                 </div>
-                <div class="front d-flex align-items-center justify-content-center">
-                  <div class="title" hidden><%= search_movie['title']%></div>
-                  <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
-                  <div class="overview" hidden><%= search_movie['overview']%></div>
-                  <div class="id" hidden><%= search_movie['id']%></div>
-                  <p class="ellipsis pt-5"><%= search_movie['title']%></p>
-                  <% if search_movie['poster_path'] %>
-                    <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
-                  <% else %>
-                    <img src="/assets/no_phone.jpg" class="card-img">
-                  <% end %>
-                </div>
-              </div>
-              <% i += 1 %>
-              <% break if i.modulo(20) == 0 %>
-            <% end %>
-            <div class="last-blank col-2"></div>
+                <% i += 1 %>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <div class="line col-12"></div>
+          <% if i.modulo(24) == 0  || @search_movies[i].blank? %>
+            <div class="line col-12 mt-0 pt-0"></div>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
 
+    <% if false %>人気映画表示<% end %>
     <div class="row">
-      <h3 class="col-12 mt-4 mb-4"><span>人気急上昇中</span></h3>
+      <h3 class="col-12 mt-2 mb-3"><span><%= t('.popular_title') %></span></h3>
       <% i = 0 %>
       <% 12.times do %>
-        <% movies_pop = @movies_pops[i]['table'] %>
+        <% popular_movie = @popular_movies[i]['table'] %>
         <div class="front col-2 style="width:50px">
-          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movies_pop['poster_path'], class: "card-img" %>
+          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + popular_movie['poster_path'], class: "card-img" %>
           <div class="foundation col-12"></div>
-          <div class="title" hidden><%= movies_pop['title']%></div>
-          <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{movies_pop['poster_path']}" %></div>
-          <div class="overview" hidden><%= movies_pop['overview']%></div>
-          <div class="id" hidden><%= movies_pop['id']%></div>
+          <% if false %>JavaScriptで利用する隠し要素読み込み<% end %>
+          <%= render 'movies/hidden',movie: popular_movie %>
         </div>
         <% i += 1 %>
         <% if i == 6 %>
@@ -105,85 +68,8 @@
       <% end %>
       <div class="line col-12"></div>
     </div>
-
   </div>
 </div>
 
-<div class="modal-container">
-  <div class="modal-body">
-    <div class="modal-close"><i class="fa fa-close"></i></div>
-    <div class="modal-content">
-      <div class="row">
-          <img src="" class="modal-left col-6 pt-5 pb-5 pl-5">
-          <div class="modal-right col-6 pt-5 pb-5 pr-5">
-            <h5 class="pb-3 mb-3"></h5>
-            <p class="mb-3"></p>
-            <a href="" class="mb-3">詳細画面へ</a>
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  $(function(){
-    var close = $('.modal-close');
-    var container = $('.modal-container');
-    var front = $('.front');
-
-    //開く
-    front.on('click',function(){	
-      var id = $(this).children('.id').text();
-      $.when(
-        $.ajax({
-          url: "/movies/tmdb_id",
-          type: "POST",
-          data: { tmdb_id: id},
-          context: this,
-          success: function(tmdb_id){
-            id = tmdb_id
-          },
-          error: function(tmdb_id){
-            console.log("失敗")
-          }
-        })
-      ).done(function() {
-        console.log(id)
-        var title = $(this).children('.title').text();
-        var image = $(this).children('.image').text();
-        var overview = $(this).children('.overview').text();
-        if (image == "https://image.tmdb.org/t/p/w1280"){
-          image = "/assets/no_phone.jpg";
-        }
-        console.log(image);
-        if (!overview){
-          overview = "詳細不明";
-        }
-        console.log(title)
-        $(container).find('img').attr('src', image);
-        $(container).find('h5').text(title);
-        $(container).find('p').text(overview);
-        $(container).find('a').attr("href", "movies/" + id)
-
-        container.addClass('active');
-        return false;
-      });
-    });
-
-    //閉じる
-    close.on('click',function(){	
-      container.removeClass('active');
-    });
-
-    //画面外をクリックしたら閉じる
-    $(document).on('click',function(e) {
-      if(!$(e.target).closest('.modal-body').length) {
-        container.removeClass('active');
-      }
-    });
-  });
-</script>
-
-
-
-
+<% if false %>モーダル読み込み<% end %>
+<%= render 'movies/modal' %>
