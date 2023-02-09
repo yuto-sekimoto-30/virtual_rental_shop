@@ -12,14 +12,12 @@
         <h3 class="col-12 mt-4 mb-4"><span><%= t('.no_search') %></span></h3>
         <div class="line mb-4 col-12"></div>
       <% else %><% if false %>検索結果がある場合<% end %>
-
         <% i = 0 %>
         <%= while i < @search_movies.count do %>
-          <% if false %>検索結果の左側表示<% end %>
-          <div class="col-6">
+          <div class="col-6 sample">
             <div class="row">
-              <div class="first-blank col-2"></div>
-              <%= while i < @search_movies.count do %>
+              <% 12.times do %>
+                <% break if @search_movies[i].blank? %>
                 <% search_movie = @search_movies[i]['table']%>
                 <div class="movie col-1 mt-4 d-flex">
                 <div class="top"></div>
@@ -41,50 +39,19 @@
                   </div>
                 </div>
                 <% i += 1 %>
-                <% break if i.modulo(10) == 0 %>
               <% end %>
             </div>
           </div>
-
-          <% if false %>検索結果の右側表示<% end %>
-          <div class="col-6">
-            <div class="row">
-              <%= while i < @search_movies.count do %>
-                <% search_movie = @search_movies[i]['table']%>
-                <div class="movie col-1 mt-4 d-flex">
-                <div class="top"></div>
-                    <div class="ftop pt-1">
-                    <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                    <%= "BD" %>
-                  </div>
-                  <div class="front d-flex align-items-center justify-content-center">
-                    <div class="title" hidden><%= search_movie['title']%></div>
-                    <div class="image" hidden><%= "https://image.tmdb.org/t/p/w1280#{search_movie['poster_path']}" %></div>
-                    <div class="overview" hidden><%= search_movie['overview']%></div>
-                    <div class="id" hidden><%= search_movie['id']%></div>
-                    <p class="ellipsis pt-5"><%= search_movie['title']%></p>
-                    <% if search_movie['poster_path'] %>
-                      <%= image_tag 'https://image.tmdb.org/t/p/w1280' + search_movie['poster_path'], class: "card-img" %>
-                    <% else %>
-                      <img src="/assets/no_phone.jpg" class="card-img">
-                    <% end %>
-                  </div>
-                </div>
-                <% i += 1 %>
-                <% break if i.modulo(20) == 0 %>
-              <% end %>
-              <div class="last-blank col-2"></div>
-            </div>
-          </div>
-
-          <div class="line col-12"></div>
+          <% if i.modulo(24) == 0  || @search_movies[i].blank? %>
+            <div class="line col-12 mt-0 pt-0"></div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
 
     <% if false %>人気映画表示<% end %>
     <div class="row">
-      <h3 class="col-12 mt-4 mb-4"><span><%= t('.popular_title') %></span></h3>
+      <h3 class="col-12 mt-2 mb-3"><span><%= t('.popular_title') %></span></h3>
       <% i = 0 %>
       <% 12.times do %>
         <% popular_movie = @popular_movies[i]['table'] %>
@@ -101,7 +68,6 @@
       <% end %>
       <div class="line col-12"></div>
     </div>
-
   </div>
 </div>
 

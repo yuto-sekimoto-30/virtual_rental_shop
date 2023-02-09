@@ -16,10 +16,10 @@
 }
 .shelf .movie{
   writing-mode: vertical-lr;
-  border-left: 10px solid black;
+  border: 5px solid black;
   color: black;
   height: 380px;
-  transform-style: preserve-3d; 
+  transform-style: preserve-3d;
   padding: 0;
 }
 .shelf .movie:hover{

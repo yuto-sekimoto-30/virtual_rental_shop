@@ -27,7 +27,7 @@ class MoviesController < ApplicationController
         end
       elsif params[:type] == "2" #人物名が選択された場合
         person_id = JSON.parse((Tmdb::Search.person(params[:name])).to_json)
-        if !(person_id['table']['total_pages'].to_i == 0)
+        if !(person_id['table']['total_results'].to_i == 0)
           @search_movies = JSON.parse((Tmdb::Person.movie_credits(person_id['table']['results'][0]['table']['id'])).to_json)['table']['cast']
         end
       end
