@@ -1,0 +1,5 @@
+<% if current_user.relationships.find_by(followed_id: user.id) %>
+  <%= render 'relationships/follow', followed_id: user.id %>
+<% else %>
+  <%= render 'relationships/unfollow', followed_id: user.id %>
+<% end %>

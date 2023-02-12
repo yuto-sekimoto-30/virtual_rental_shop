@@ -18,6 +18,7 @@ ja:
     copyright: "© 2022 Copyright"
     message:
       require_login: "ログインしてください"
+      like: "お気に入りに追加："
   users:
     new:
       title: "アカウント作成"
@@ -83,7 +84,6 @@ ja:
       popular_title: "人気急上昇中"
     show:
       title: "映画詳細"
-      like_message: "お気に入りに追加："
     search:
       title: "映画検索"
   relationships:

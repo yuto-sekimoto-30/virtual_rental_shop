@@ -1,5 +1,6 @@
 <div class="col-12 show-movie">
   <div class="row pt-5">
+    <% if false %>映画詳細表示<% end %>
     <div class="col-6 mb-4">
       <%= image_tag @movie['poster_path'], class: "card-img" %>
     </div>
@@ -8,7 +9,7 @@
         <h5 class="col-12 pb-3"><%= @movie['title'] %></h5>
         <p class="col-12"><%= @movie['overview'] %></p></p>
         <p class="col-12">
-          <%= t '.like_message' %>
+          <%= t 'defaults.message.like' %>
           <% if TmdbBookmark.find_by(user_id: current_user.id, tmdb_id: @movie['id']) %>
             <%= render 'tmdb_bookmarks/tmdb_bookmark', tmdb_id: @movie['id'] %>
           <% else %>
@@ -21,11 +22,12 @@
       </div>
     </div>
 
+    <% if false %>コメント一覧<% end %>
     <div class="tmdb_comments col-10 offset-1 pt-4 mb-2">
       <div class="row">
         <% @tmdb_comments.each do |tmdb_comment| %>
           <div class="col-2">
-            <%= image_tag tmdb_comment.user.avatar.url, class: "rounded-circle", size: '80x80' %>
+            <%= link_to image_tag(tmdb_comment.user.avatar.url, class: "rounded-circle", size: '80x80'), user_path(tmdb_comment.user) %>
             <p><%= tmdb_comment.user.name %></p>
           </div>
           <div class="col-10 mb-5 border d-flex align-items-center">
@@ -35,6 +37,7 @@
       </div>
     </div>
 
+    <% if false %>コメントフォーム<% end %>
     <div class="form col-10 offset-1">
       <%= form_with url: movie_tmdb_comments_path(@movie['id']), scope: :tmdb_comment, method: :post, local: true do |f| %>
         <div class="form-group col-12">
