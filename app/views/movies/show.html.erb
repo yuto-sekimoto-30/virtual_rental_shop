@@ -8,7 +8,7 @@
         <h5 class="col-12 pb-3"><%= @movie['title'] %></h5>
         <p class="col-12"><%= @movie['overview'] %></p></p>
         <p class="col-12">
-          お気に入りに追加：
+          <%= t '.like_message' %>
           <% if TmdbBookmark.find_by(user_id: current_user.id, tmdb_id: @movie['id']) %>
             <%= render 'tmdb_bookmarks/tmdb_bookmark', tmdb_id: @movie['id'] %>
           <% else %>
@@ -38,11 +38,11 @@
     <div class="form col-10 offset-1">
       <%= form_with url: movie_tmdb_comments_path(@movie['id']), scope: :tmdb_comment, method: :post, local: true do |f| %>
         <div class="form-group col-12">
-          <%= f.text_area :comment, class: 'form-control', placeholder: "コメント", rows: "2" %>
+          <%= f.text_area :comment, class: 'form-control', placeholder: t('defaults.comment'), rows: "2" %>
         </div>
           <%= f.hidden_field :tmdb_id, :value => @movie['id'], class: 'form-control' %>
         <div class="form-group col-12">
-          <%= f.submit 'コメントする', class: 'btn btn-outline-primary btn-block' %>
+          <%= f.submit t('defaults.comment'), class: 'btn btn-outline-primary btn-block' %>
         </div>
       <% end %>
     </div>

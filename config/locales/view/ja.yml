@@ -10,6 +10,7 @@ ja:
     show: "詳細"
     delete: "削除"
     search: "検索"
+    comment: "コメント"
     bookmark: "お気に入り"
     menu: "Menu"
     movie: "映画"
@@ -82,6 +83,7 @@ ja:
       popular_title: "人気急上昇中"
     show:
       title: "映画詳細"
+      like_message: "お気に入りに追加："
     search:
       title: "映画検索"
   relationships:
