@@ -3,10 +3,6 @@ class UsersController < ApplicationController
   before_action :require_login, only: %i[index show edit update]
   before_action :user_authority, only: %i[edit update]
 
-  def index
-    @users = User.where.not("id = ?", current_user.id).page(params[:page])
-  end
-
   def show; end
 
   def new

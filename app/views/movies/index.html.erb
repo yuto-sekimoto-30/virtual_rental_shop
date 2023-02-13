@@ -23,7 +23,6 @@
                 <div class="top"></div>
                   <div class="ftop pt-1">
                     <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
-                    <%= "BD" %>
                   </div>
                   <div class="front d-flex align-items-center justify-content-center">
                     <div class="title" hidden><%= search_movie['title']%></div>

@@ -10,6 +10,7 @@ ja:
     show: "詳細"
     delete: "削除"
     search: "検索"
+    comment: "コメント"
     bookmark: "お気に入り"
     menu: "Menu"
     movie: "映画"
@@ -17,6 +18,8 @@ ja:
     copyright: "© 2022 Copyright"
     message:
       require_login: "ログインしてください"
+      like: "お気に入りに追加："
+      email: "メールアドレス："
   users:
     new:
       title: "アカウント作成"
