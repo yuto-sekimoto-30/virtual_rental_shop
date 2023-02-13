@@ -7,14 +7,19 @@
           <p class="mt-1"><%= @user.name %></p>
         </div>
         <div class="col-6">
-          <div class="like col-12 mb-2">
-            <%= t 'defaults.message.like' %>
-            <%= render "relationships/like_button", user: @user %>
-          </div>
-          <div class="email col-12 mb-2">
-            <%= @user.email%>
-          </div>
-          <div class="col-12">
+          <% if current_user != @user %>
+            <div class="like col-12 mb-2">
+              <%= t 'defaults.message.like' %>
+              <%= render "relationships/like_button", user: @user %>
+            </div>
+          <% end %>
+          <% if current_user == @user %>
+            <div class="email col-12 mb-2">
+              <%= t 'defaults.message.email' %>
+              <%= @user.email%>
+            </div>
+          <% end %>
+          <div class="introduction col-12">
             <%= @user.introduction %>
           </div>
           <div class="col-12 text-center mt-2 ml-2">

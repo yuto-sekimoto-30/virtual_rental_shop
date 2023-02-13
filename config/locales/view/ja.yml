@@ -19,6 +19,7 @@ ja:
     message:
       require_login: "ログインしてください"
       like: "お気に入りに追加："
+      email: "メールアドレス："
   users:
     new:
       title: "アカウント作成"
