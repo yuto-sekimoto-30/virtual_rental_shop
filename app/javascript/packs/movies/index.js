@@ -24,7 +24,7 @@ $(function(){
       var image = $(this).children('.image').text();
       var overview = $(this).children('.overview').text();
       if (image == "https://image.tmdb.org/t/p/w1280"){
-        image = "/assets/no_phone.jpg";
+        image = "/images/no_phone.jpg";
       }
       console.log(image);
       if (!overview){

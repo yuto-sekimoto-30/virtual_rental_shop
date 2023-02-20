@@ -1,13 +1,10 @@
 class MoviesController < ApplicationController
+  include TmdbKey
   skip_before_action :verify_authenticity_token
   before_action :require_login, only: %i[show]
   before_action :get_genre_array, only: %i[index]
   before_action :get_popular_movies, only: %i[index]
   before_action :set_form, only: %i[index]
-
-  require 'themoviedb-api'
-  Tmdb::Api.key("a345acb42340ca68939f4c241dc52adb")
-  Tmdb::Api.language("ja")
 
   def tmdb_id
     tmdb_id = params[:tmdb_id]
@@ -40,7 +37,7 @@ class MoviesController < ApplicationController
     end
 
     #ジャンルが選択されていた場合にジャンルで絞る
-    if !params[:genre].blank?
+    if params[:genre].present?
       @search_movies.delete_if do |search_movie|
         !search_movie['table']['genre_ids'].include?(params[:genre].to_i)
       end
@@ -50,7 +47,7 @@ class MoviesController < ApplicationController
   def show
     @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)['table']
     if @movie['poster_path'].blank?
-      @movie['poster_path'] = "/assets/no_phone.jpg"
+      @movie['poster_path'] = "/images/no_phone.jpg"
     else
       @movie['poster_path'] = 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path']
     end
@@ -77,7 +74,7 @@ class MoviesController < ApplicationController
       @popular_movies = JSON.parse(Tmdb::Movie.popular.to_json)['table']['results']
     end
 
-    #フォーム初期値設定
+    # フォーム初期値設定
     def set_form
       @name = params[:name] || ""
       @type = params[:type] || 1
