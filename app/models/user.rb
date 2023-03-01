@@ -3,6 +3,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :tmdb_bookmarks, dependent: :destroy
   has_many :tmdb_comments, dependent: :destroy
+  has_many :movie_states, dependent: :destroy
+  has_many :tmdb_reviews, dependent: :destroy
 
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id"
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id"
@@ -16,6 +18,11 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :email, uniqueness: true
   validates :reset_password_token, uniqueness: true, allow_nil: true
+  enum gender: {
+      unanswered: 0,
+      male: 1,
+      female: 2
+  }
 
   def follow(user_id)
     self.relationships.create(followed_id: user_id)

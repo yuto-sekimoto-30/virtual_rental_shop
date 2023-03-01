@@ -12,10 +12,8 @@ class TmdbBookmarksController < ApplicationController
     end
     user = User.find(user_id)
     @tmdb_bookmarks = user.tmdb_bookmarks
-    puts @tmdb_bookmarks.count
     @movies = []
     @tmdb_bookmarks.each do |tmdb_bookmark|
-      puts tmdb_bookmark.tmdb_id
       @movie = JSON.parse((Tmdb::Movie.detail(tmdb_bookmark.tmdb_id)).to_json)['table']
       @movies.push(@movie)
     end

@@ -10,6 +10,10 @@
 body{
   background-image: image-url('/images/digital.jpg');
   background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 13px;
 }
 //利用規約,プライバシーポリシー
 .wrap{
@@ -37,11 +41,6 @@ footer .link {
 }
 footer {
   margin-top: auto;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 footer {
   margin-top: auto;

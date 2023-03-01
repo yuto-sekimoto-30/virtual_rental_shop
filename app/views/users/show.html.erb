@@ -1,35 +1,33 @@
-<div class="row">
-  <div class="profile col-6 offset-3">
-    <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.profile' %></h5>
-      <div class="row mb-1">
-        <div class="col-6 p-3">
-          <%= image_tag @user.avatar.url, class: "rounded-circle" %>
-          <p class="mt-1"><%= @user.name %></p>
+<div class="profile col-12 offset-3">
+  <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.profile' %></h5>
+    <div class="row mb-1">
+      <div class="col-6 p-3">
+        <%= image_tag @user.avatar.url, class: "rounded-circle" %>
+        <p class="mt-1"><%= @user.name %></p>
+      </div>
+      <div class="col-6">
+        <% if current_user != @user %>
+          <div class="like col-12 mb-2">
+            <%= t 'defaults.message.like' %>
+            <%= render "relationships/like_button", user: @user %>
+          </div>
+        <% end %>
+        <% if current_user == @user %>
+          <div class="email col-12 mb-2">
+            <%= t 'defaults.message.email' %>
+            <%= @user.email%>
+          </div>
+        <% end %>
+        <div class="introduction col-12">
+          <%= @user.introduction %>
         </div>
-        <div class="col-6">
-          <% if current_user != @user %>
-            <div class="like col-12 mb-2">
-              <%= t 'defaults.message.like' %>
-              <%= render "relationships/like_button", user: @user %>
-            </div>
-          <% end %>
-          <% if current_user == @user %>
-            <div class="email col-12 mb-2">
-              <%= t 'defaults.message.email' %>
-              <%= @user.email%>
-            </div>
-          <% end %>
-          <div class="introduction col-12">
-            <%= @user.introduction %>
-          </div>
-          <div class="col-12 text-center mt-2 ml-2">
-          <%= link_to t('relationships.index.title'), relationships_path(user_id: @user.id), class: 'text-right bookmark pr-2'%>
-          <%= link_to t('tmdb_bookmarks.index.title'), tmdb_bookmarks_path(user_id: @user.id), class: 'text-right bookmark pr-2'%>
-          <% if params[:id].to_i == current_user.id %>
-            <%= link_to t('.to_edit'), edit_user_path(current_user), class: "text-right" %>
-          <% end %>
-          </div>
+        <div class="col-12 text-center mt-2 ml-2">
+        <%= link_to t('relationships.index.title'), relationships_path(user_id: @user.id), class: 'text-right bookmark pr-2'%>
+        <%= link_to t('tmdb_bookmarks.index.title'), tmdb_bookmarks_path(user_id: @user.id), class: 'text-right bookmark pr-2'%>
+        <% if params[:id].to_i == current_user.id %>
+          <%= link_to t('.to_edit'), edit_user_path(current_user), class: "text-right" %>
+        <% end %>
         </div>
       </div>
-  </div>
+    </div>
 </div>

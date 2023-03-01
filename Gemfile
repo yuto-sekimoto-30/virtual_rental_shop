@@ -72,3 +72,4 @@ gem 'jquery-rails'
 gem 'rubocop', require:false
 gem 'rubocop-rails', require:false
 gem 'ransack', '~> 2.1.1'
+gem 'enum_help'

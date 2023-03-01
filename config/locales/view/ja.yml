@@ -20,6 +20,10 @@ ja:
       require_login: "ログインしてください"
       like: "お気に入りに追加："
       email: "メールアドレス："
+    profile:
+      to_edit: ""
+      like: "お気に入りに追加："
+      email: "メールアドレス："
   users:
     new:
       title: "アカウント作成"
@@ -32,9 +36,8 @@ ja:
     show:
       title: "マイページ"
       profile: "プロフィール"
-      to_edit: "編集画面へ"
     edit:
-      title: "ユーザー編集"
+      title: "プロフィール編集"
     update:
       success: "ユーザー情報を編集しました"
       fail: "ユーザー情報の編集に失敗しました"
@@ -49,6 +52,14 @@ ja:
     destroy:
       title: "ログアウト"
       success: "ログアウトしました"
+  tmdb_reviews:
+    new:
+      title: "レビュー作成"
+      review: "レビューを投稿"
+    edit:
+      title: "レビュー更新"
+      update: "レビューを投稿"
+      destroy: "レビューを削除"
   password_resets:
     new:
       title: "パスワードをお忘れの場合"

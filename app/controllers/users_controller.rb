@@ -3,13 +3,17 @@ class UsersController < ApplicationController
   before_action :require_login, only: %i[index show edit update]
   before_action :user_authority, only: %i[edit update]
 
-  def show; end
+  def show
+    render layout: "profile"
+  end
 
   def new
     @user = User.new
   end
 
-  def edit; end
+  def edit
+    render layout: "profile"
+  end
 
   def create
     @user = User.new(user_params)
@@ -23,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    #binding.pry
     if @user.update(user_params)
       redirect_to user_path(current_user), success: t('.success')
     else
@@ -37,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :introduction, :password, :password_confirmation, :avatar, :avatar_cache)
+    params.require(:user).permit(:name, :email, :birth_date, :gender, :introduction, :password, :password_confirmation, :avatar, :avatar_cache)
   end
 
   def user_authority
