@@ -1,0 +1,40 @@
+<div class="side-menu col-3">
+  <div class="row">
+    <div class="profile-image col-12 mt-4">
+      <%= image_tag asset_path(@user.avatar.url) %>
+      <p><%= @user.name %></p>
+    </div>
+    <div class="profile-edit col-12 mb-4">
+      <%= link_to t('users.edit.title'), edit_user_path(@user) %>
+    </div>
+    <div class="user-data col-12 mb-4">
+      <div class="user-record mb-3">
+        <h7>映画データ</h7>
+        <ul class="col-12">
+          <li>
+            <%= link_to "全て(#{@msnid_sum})", user_path(@user) %>
+          </li>
+          <% MovieStateName.all.each do |msn| %>
+            <li>
+              <%= link_to "#{msn.name}(#{@msnid_arr[msn.id - 1]})", user_path(@user, msnid: msn.id) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="user-best mb-3">
+        <h7>マイランキング</h7>
+        <ul class="col-12">
+          <li>トップ映画10</li>
+          <li>ワースト映画10</li>
+        </ul>
+      </div>
+      <div class="user-like">
+        <h7>お気に入り</h7>
+        <ul class="col-12">
+          <li><%= link_to t('defaults.movie'), tmdb_bookmarks_path %></li>
+          <li><%= link_to t('defaults.user'), relationships_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,9 +10,9 @@
     <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <% if logged_in? %>
-              <%= render 'shared/logged_in' %>
-            <% else %>
-              <%= render 'shared/logout' %>
+            <%= render 'shared/logged_in' %>
+          <% else %>
+            <%= render 'shared/logout' %>
         <% end %>
         <li class="nav-item">
           <%= link_to movies_path, class: "text-white" do %>

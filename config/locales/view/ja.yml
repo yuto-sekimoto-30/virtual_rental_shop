@@ -35,7 +35,6 @@ ja:
       title: "ユーザー一覧"
     show:
       title: "マイページ"
-      profile: "プロフィール"
     edit:
       title: "プロフィール編集"
     update:

@@ -1,33 +1,28 @@
-<div class="profile col-12 offset-3">
-  <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.profile' %></h5>
-    <div class="row mb-1">
-      <div class="col-6 p-3">
-        <%= image_tag @user.avatar.url, class: "rounded-circle" %>
-        <p class="mt-1"><%= @user.name %></p>
-      </div>
-      <div class="col-6">
-        <% if current_user != @user %>
-          <div class="like col-12 mb-2">
-            <%= t 'defaults.message.like' %>
-            <%= render "relationships/like_button", user: @user %>
-          </div>
-        <% end %>
-        <% if current_user == @user %>
-          <div class="email col-12 mb-2">
-            <%= t 'defaults.message.email' %>
-            <%= @user.email%>
-          </div>
-        <% end %>
-        <div class="introduction col-12">
-          <%= @user.introduction %>
+<div class="mypage col-12">
+  <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h5>
+  <div class="row">
+    <% i = 0 %>
+    <% @movies.each do |movie| %>
+        <div class="col-2 mt-3">
+          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'], class: "card-img" %>
         </div>
-        <div class="col-12 text-center mt-2 ml-2">
-        <%= link_to t('relationships.index.title'), relationships_path(user_id: @user.id), class: 'text-right bookmark pr-2'%>
-        <%= link_to t('tmdb_bookmarks.index.title'), tmdb_bookmarks_path(user_id: @user.id), class: 'text-right bookmark pr-2'%>
-        <% if params[:id].to_i == current_user.id %>
-          <%= link_to t('.to_edit'), edit_user_path(current_user), class: "text-right" %>
+    <% end %>
+    <div class="col-12 pagination mt-3 mb-3">
+      <p>
+        <% if 1 != @current_page %>
+          <%= link_to "前へ", user_path(@user, msnid: @msnid, page: @current_page - 1), class: "mr-2" %>
         <% end %>
-        </div>
-      </div>
+        <% (@first_page...(@max_pages + @first_page)).each do |page| %>
+          <% if page == @current_page %>
+            <%= page %>
+          <% else %>
+            <%= link_to page, user_path(@user, msnid: @msnid, page: page) %>
+          <% end %>
+        <% end %>
+        <% if @pages != @current_page %>
+          <%= link_to "次へ", user_path(@user, msnid: @msnid, page: @current_page + 1), class: "ml-2"  %>
+        <% end %>
+      </p>
     </div>
+  </div>
 </div>

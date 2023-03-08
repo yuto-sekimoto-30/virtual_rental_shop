@@ -1,6 +1,6 @@
 <div class="row">
   <div class="user-new col-6 offset-3">
-    <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h5>
+    <h6 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h6>
     <div class="form col-12">
       <%= form_with model: @user, local: true do |f| %>
         <%= render 'shared/error_messages', {object: f.object} %>
@@ -12,8 +12,20 @@
         </div>
         <div class="form-group">
           <div class="form-inline">
-            <%= f.label :email, class:"col-3 small"%>
+            <%= f.label :email, class: "col-3 small"%>
             <%= f.email_field :email, class: 'form-control col-9' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <%= f.label :birth_date, class: "col-3 small"%>
+            <%= f.date_select :birth_date, start_year: 1930, end_year: (Time.now.year - 10), class: 'form-control col-9' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <%= f.label :gender, class: "col-3 small"%>
+            <%= f.select :gender, User.genders_i18n.keys.map {|k| [User.genders_i18n[k], k]}, class: 'form-control col-9' %>
           </div>
         </div>
         <div class="form-group">
@@ -39,7 +51,7 @@
           <%= image_tag @user.avatar.url, class: "rounded-circle mb-3", size: '200x200' if @user.avatar? %>
         </div>
         <div class="form-group col-12">
-          <%= f.submit t('defaults.register'), class: 'btn btn-outline-primary btn-block' %>
+          <%= f.submit t('defaults.register'), class: 'col-4 offset-4 btn-block p-2' %>
         </div>
       <% end %>
     </div>

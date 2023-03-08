@@ -16,6 +16,7 @@
           <%= render 'tmdb_bookmarks/tmdb_unbookmark', tmdb_id: @movie['id'] %>
           <% end %>
         </p>
+        <%= link_to "aaa", new_movie_tmdb_reviews_path(movie_id: @movie['id']) %>
         <% if !@movie['backdrop_path'].blank? %>
           <%= image_tag @movie['backdrop_path'], class: "card-img mt-5" %>
         <% end %>

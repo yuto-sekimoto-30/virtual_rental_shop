@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'profile', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -17,42 +16,7 @@
     <div class="container text-center mb-5 mt-5">
       <%= render 'shared/flash_message' %>
       <div class="row">
-        <div class="side-menu col-3">
-          <div class="row">
-            <div class="profile-image col-12 mt-4">
-              <%= image_tag asset_path(current_user.avatar.url) %>
-              <p><%= current_user.name %></p>
-            </div>
-            <div class="profile-edit col-12 mb-4">
-              <%= link_to t('users.edit.title'), edit_user_path(current_user) %>
-            </div>
-            <div class="user-data col-12 mb-4">
-              <div class="user-record mb-3">
-                <h7>映画データ</h7>
-                <ul class="col-12">
-                  <li>見た</li>
-                  <li>見たい</li>
-                  <li>途中</li>
-                  <li>断念</li>
-                </ul>
-              </div>
-              <div class="user-best mb-3">
-                <h7>マイランキング</h7>
-                <ul class="col-12">
-                  <li>トップ映画10</li>
-                  <li>ワースト映画10</li>
-                </ul>
-              </div>
-              <div class="user-like">
-                <h7>お気に入り</h7>
-                <ul class="col-12">
-                  <li>映画</li>
-                  <li>ユーザー</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <%= render 'shared/side_menu' %>
         <div class="col-9">
           <%= yield %>
         </div>

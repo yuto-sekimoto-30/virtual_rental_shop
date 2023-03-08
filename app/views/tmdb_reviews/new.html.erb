@@ -1,5 +1,11 @@
 <div class="tmdb-review-new col-12">
   <h5 class="col-12 mt-3 mb-3 pb-3"><%= t '.title' %></h5>
+  <div class="col-4 offset-4 mb-3">
+      <%= image_tag @movie['poster_path'], class: "card-img" %>
+  </div>
+  <div class="col-12 mb-3">
+    <h5 class="col-12 pb-3"><%= @movie['title'] %></h5>
+  </div>
   <div class="form col-12">
     <%= form_with model: @tmdb_review, url: movie_tmdb_reviews_path, local: true do |f| %>
       <div class="form-group">

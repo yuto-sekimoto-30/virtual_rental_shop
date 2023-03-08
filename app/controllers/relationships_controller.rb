@@ -1,5 +1,6 @@
 class RelationshipsController < ApplicationController
   before_action :require_login, only: %i[create destroy]
+  before_action :get_movie_data, only: %i[index]
   def index
     if !params[:user_id].blank?
       user_id = params[:user_id]
@@ -7,11 +8,12 @@ class RelationshipsController < ApplicationController
       user_id = current_user.id
     end
     relationships = Relationship.where(follower_id: user_id)
-    @main_user = User.find(user_id)
+    @user = User.find(user_id)
     @users = []
     relationships.each do |relationship|
       @users.push(User.find(relationship.followed_id))
     end
+    render layout: "profile"
   end
 
   def create

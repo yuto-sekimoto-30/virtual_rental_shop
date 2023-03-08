@@ -1,17 +1,26 @@
-//プロフィール画面
-.profile{
+//ユーザー作成画面
+.user-new{
   background-color: white;
 }
-.profile .introduction{
-  border-top: 1px solid black;
-}
-.profile h6{
+.user-new h6{
   border-bottom: 1px solid black;
 }
-.profile img{
-  width: 100%;
+.user-new .btn-block:hover{
+  text-decoration:underline;
 }
 
+//マイページ
+.mypage{
+  border: double 5px #4ec4d3;
+}
+.mypage h5{
+  border-bottom: double 5px #4ec4d3;
+  font-weight: bold;
+}
+.mypage .pagination p{
+  font-size: 18px;
+  margin: 0 auto;
+}
 //プロフィール編集画面
 .user-edit{
   border: double 5px #4ec4d3;
