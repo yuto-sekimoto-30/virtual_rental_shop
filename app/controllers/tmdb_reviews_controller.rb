@@ -2,10 +2,11 @@ class TmdbReviewsController < ApplicationController
   include TmdbKey
   layout "profile"
   before_action :set_tmdb_review, only: %i[new show edit update destroy]
-  before_action :get_movie, only: %i[new edit]
+  before_action :get_movie, only: %i[new edit create update]
+  before_action :set_user, only: %i[new edit create update destroy]
+  before_action :get_movie_data, only: %i[new edit create update]
 
   def new
-    @user = current_user
     if @tmdb_review.present?
       redirect_to edit_movie_tmdb_reviews_path
     else
@@ -16,30 +17,34 @@ class TmdbReviewsController < ApplicationController
   def create
     @tmdb_review = TmdbReview.new(review_params)
     if @tmdb_review.save
-      redirect_to request.referer
+      redirect_to edit_movie_tmdb_reviews_path, success: t('.success')
     else
-      redirect_to request.referer
+      flash.now[:danger] = t '.fail'
+      render :new
     end
   end
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
     if @tmdb_review.update(review_params)
-      redirect_to request.referer
+      redirect_to edit_movie_tmdb_reviews_path, success: t('.success')
     else
-      redirect_to request.referer
+      flash.now[:danger] = t '.fail'
+      render :edit
     end
   end
 
   def destroy
     @tmdb_review.destroy
-    redirect_to root_path
+    redirect_to user_path(@user), success: t('.success')
   end
 
   private
+  def set_user
+    @user = current_user
+  end
+
   def set_tmdb_review
     @tmdb_review = current_user.tmdb_reviews.find_by(tmdb_id: params[:movie_id])
   end

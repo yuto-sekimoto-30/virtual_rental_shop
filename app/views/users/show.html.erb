@@ -1,28 +1,13 @@
 <div class="mypage col-12">
-  <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h5>
+  <h5 class="col-12 mt-3 mb-3 pb-3"><%= t '.title' %></h5>
   <div class="row">
-    <% i = 0 %>
     <% @movies.each do |movie| %>
         <div class="col-2 mt-3">
-          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'], class: "card-img" %>
+          <%= link_to movie_path(id: movie['id']) do %>
+            <%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['poster_path'], class: "card-img" %>
+          <% end %>
         </div>
     <% end %>
-    <div class="col-12 pagination mt-3 mb-3">
-      <p>
-        <% if 1 != @current_page %>
-          <%= link_to "前へ", user_path(@user, msnid: @msnid, page: @current_page - 1), class: "mr-2" %>
-        <% end %>
-        <% (@first_page...(@max_pages + @first_page)).each do |page| %>
-          <% if page == @current_page %>
-            <%= page %>
-          <% else %>
-            <%= link_to page, user_path(@user, msnid: @msnid, page: page) %>
-          <% end %>
-        <% end %>
-        <% if @pages != @current_page %>
-          <%= link_to "次へ", user_path(@user, msnid: @msnid, page: @current_page + 1), class: "ml-2"  %>
-        <% end %>
-      </p>
-    </div>
+    <%= render 'shared/pagination_movies', {user: @user, msnid: @msnid, pages: @pages, cp: @current_page, fp: @first_page, mp: @max_pages} %>
   </div>
 </div>

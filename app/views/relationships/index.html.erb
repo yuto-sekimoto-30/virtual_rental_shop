@@ -1,5 +1,6 @@
 <div class="col-12 user-bookmark">
   <h5 class="col-12 mt-3 mb-3 pb-3"><%= t '.title' %></h5>
+  <% if @users.present? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -15,4 +16,7 @@
       <%= render partial: "relationships/user", collection: @users %>
     </tbody>
   </table>
+  <% else %>
+    <p>該当なし</p>
+  <% end %>
 </div>

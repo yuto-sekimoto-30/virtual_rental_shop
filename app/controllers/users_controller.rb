@@ -2,9 +2,11 @@ class UsersController < ApplicationController
   include TmdbKey
   before_action :set_user, only: %i[show edit update]
   before_action :require_login, only: %i[index show edit update]
+  before_action :new_user, only: %i[new]
   before_action :user_authority, only: %i[edit update]
   before_action :get_pagination_movies, only: %i[show]
-  before_action :get_movie_data, only: %i[show edit]
+  before_action :get_movie_data, only: %i[show edit update]
+  layout 'profile', only: %i[show edit update]
 
   def index
     @users = User.all
@@ -12,17 +14,11 @@ class UsersController < ApplicationController
     @users = @users.page(params[:page]).per(10)
   end
 
-  def show
-    render layout: "profile"
-  end
-
-  def new
-    @user = User.new
-  end
+  def show; end
+  def new; end
 
   def edit
     @tmdb_reviews = current_user.tmdb_reviews
-    render layout: "profile"
   end
 
   def create
@@ -46,6 +42,10 @@ class UsersController < ApplicationController
   end
 
   private
+  def new_user
+    @user = User.new
+  end
+
   def set_user
     @user = User.find(params[:id])
   end
@@ -98,5 +98,4 @@ class UsersController < ApplicationController
       @first_page = 1
     end
   end
-
 end

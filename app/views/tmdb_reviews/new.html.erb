@@ -8,6 +8,7 @@
   </div>
   <div class="form col-12">
     <%= form_with model: @tmdb_review, url: movie_tmdb_reviews_path, local: true do |f| %>
+      <%= render 'shared/error_messages', {object: @tmdb_review} %>
       <div class="form-group">
         <div class="form-inline">
           <%= f.label :title ,class: "col-3 p-4 m-0"%>

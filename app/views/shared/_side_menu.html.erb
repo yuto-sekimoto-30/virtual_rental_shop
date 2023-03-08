@@ -2,37 +2,44 @@
   <div class="row">
     <div class="profile-image col-12 mt-4">
       <%= image_tag asset_path(@user.avatar.url) %>
-      <p><%= @user.name %></p>
+      <ul>
+        <li><span class="mr-2"><%= User.human_attribute_name(:name) %></span><%= @user.name %></li>
+        <li><span class="mr-2"><%= User.human_attribute_name(:gender) %></span><%= @user.gender_i18n %></li>
+        <li><span class="mr-2"><%= User.human_attribute_name(:birth_date) %></span><%= l @user.birth_date %></li>
+        <li class="introduction mt-2"><%= @user.introduction %></li>
+      </ul>
     </div>
-    <div class="profile-edit col-12 mb-4">
-      <%= link_to t('users.edit.title'), edit_user_path(@user) %>
-    </div>
+    <% if @user == current_user %>
+      <div class="profile-edit col-12 mt-2 mb-4">
+        <%= link_to t('users.edit.title'), edit_user_path(@user) %>
+      </div>
+    <% end %>
     <div class="user-data col-12 mb-4">
       <div class="user-record mb-3">
-        <h7>映画データ</h7>
+        <h7><%= t 'defaults.side_menu.title_movie_data' %></h7>
         <ul class="col-12">
           <li>
-            <%= link_to "全て(#{@msnid_sum})", user_path(@user) %>
+            <%= link_to t('defaults.side_menu.li_all') + "(#{@msnid_sum})", user_path(@user) %>
           </li>
           <% MovieStateName.all.each do |msn| %>
             <li>
-              <%= link_to "#{msn.name}(#{@msnid_arr[msn.id - 1]})", user_path(@user, msnid: msn.id) %>
+              <%= link_to "#{msn.name}(#{@msnid_array[msn.id - 1]})", user_path(@user, msnid: msn.id) %>
             </li>
           <% end %>
         </ul>
       </div>
       <div class="user-best mb-3">
-        <h7>マイランキング</h7>
+      <h7><%= t 'defaults.side_menu.title_myrank' %></h7>
         <ul class="col-12">
-          <li>トップ映画10</li>
-          <li>ワースト映画10</li>
+          <li><%= t 'defaults.side_menu.top_movies_10' %></li>
+          <li><%= t 'defaults.side_menu.worst_movies_10' %></li>
         </ul>
       </div>
       <div class="user-like">
-        <h7>お気に入り</h7>
+      <h7><%= t 'defaults.side_menu.title_like' %></h7>
         <ul class="col-12">
-          <li><%= link_to t('defaults.movie'), tmdb_bookmarks_path %></li>
-          <li><%= link_to t('defaults.user'), relationships_path %></li>
+          <li><%= link_to t('defaults.movie'), tmdb_bookmarks_path(user_id: @user.id) %></li>
+          <li><%= link_to t('defaults.user'), relationships_path(user_id: @user.id) %></li>
         </ul>
       </div>
     </div>

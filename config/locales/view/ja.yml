@@ -18,12 +18,16 @@ ja:
     copyright: "© 2022 Copyright"
     message:
       require_login: "ログインしてください"
-      like: "お気に入りに追加："
-      email: "メールアドレス："
-    profile:
-      to_edit: ""
-      like: "お気に入りに追加："
-      email: "メールアドレス："
+    side_menu:
+      title_movie_data: "映画データ"
+      title_myrank: "マイランキング"
+      title_like: "お気に入り"
+      li_all: "全て"
+      top_movies_10: "トップ映画10"
+      worst_movies_10: "ワースト映画10"
+    pagination:
+      to_before: "前へ"
+      to_next: "次へ"
   users:
     new:
       title: "アカウント作成"
@@ -59,6 +63,14 @@ ja:
       title: "レビュー更新"
       update: "レビューを投稿"
       destroy: "レビューを削除"
+    create:
+      success: "レビューを作成しました"
+      fail: "レビューの作成に失敗しました"
+    update:
+      success: "レビューを更新しました"
+      fail: "レビューの更新に失敗しました"
+    destroy:
+      success: "レビューを削除しました"
   password_resets:
     new:
       title: "パスワードをお忘れの場合"
@@ -95,6 +107,8 @@ ja:
       popular_title: "人気急上昇中"
     show:
       title: "映画詳細"
+      like: "お気に入りに追加："
+      to_review: "レビューをする"
     search:
       title: "映画検索"
   relationships:
