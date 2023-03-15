@@ -1,0 +1,18 @@
+<% if false %>ジャンル映画一覧表示<% end %>
+<div class="row genre-movies">
+<h3 class="col-12 mt-4 mb-4 pb-3"><span><%= t('.title') + "(#{@genre_name})"%></span></h3>
+  <% @genre_movies.each do |genre_movie| %>
+      <% if genre_movie['table']['poster_path'].present? %>
+        <div class="front mb-4 col-2 style="width:50px">
+          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + genre_movie['table']['poster_path'], class: "card-img" %>
+          <% if false %>JavaScriptで利用する隠し要素読み込み<% end %>
+          <%= render 'movies/hidden', movie: genre_movie['table'] %>
+        </div>
+      <% end %>
+  <% end %>
+</div>
+
+<% if false %>JavaScript読み込み<% end %>
+<%= javascript_pack_tag 'movies/index' %>
+<% if false %>モーダル読み込み<% end %>
+<%= render 'movies/modal' %>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resource :tmdb_reviews
   end
   resources :movies, only: %i[index show create]
+  get 'genre_list', to: 'movies#genre_list'
   post 'movies/tmdb_id', to: 'movies#tmdb_id'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

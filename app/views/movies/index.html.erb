@@ -47,26 +47,35 @@
         <% end %>
       <% end %>
     </div>
+  </div>
 
-    <% if false %>人気映画表示<% end %>
-    <div class="row">
-      <h3 class="col-12 mt-2 mb-3"><span><%= t('.popular_title') %></span></h3>
-      <% i = 0 %>
-      <% 12.times do %>
-        <% popular_movie = @popular_movies[i]['table'] %>
-        <div class="front col-2 style="width:50px">
-          <%= image_tag 'https://image.tmdb.org/t/p/w1280' + popular_movie['poster_path'], class: "card-img" %>
-          <div class="foundation col-12"></div>
-          <% if false %>JavaScriptで利用する隠し要素読み込み<% end %>
-          <%= render 'movies/hidden',movie: popular_movie %>
-        </div>
-        <% i += 1 %>
-        <% if i == 6 %>
-          <div class="line mb-4 col-12"></div>
+  <% if false %>人気映画表示<% end %>
+  <div class="row popular-movies">
+  <h3 class="col-12 mt-4 mb-4 pb-3"><span><%= t '.popular_title' %></span></h3>
+    <% i = 0 %>
+    <% 12.times do %>
+      <% popular_movie = @popular_movies[i]['table'] %>
+      <div class="front mb-4 col-2 style="width:50px">
+        <%= image_tag 'https://image.tmdb.org/t/p/w1280' + popular_movie['poster_path'], class: "card-img" %>
+        <div class="foundation col-12"></div>
+        <% if false %>JavaScriptで利用する隠し要素読み込み<% end %>
+        <%= render 'movies/hidden', movie: popular_movie %>
+      </div>
+      <% i += 1 %>
+    <% end %>
+  </div>
+
+  <div class="genre-list col-12 mt-4 pt-4">
+  <h3 class="col-12 mb-2 pb-2"><span><%= t '.genre_list_title' %></h3>
+    <ul>
+      <% @genre_array.each do |key, value|%>
+        <li>
+        <%= link_to genre_list_path(id: value, name: key) do %>
+          <i class="fa-solid fa-star"></i><%= key %>
         <% end %>
+        </li>
       <% end %>
-      <div class="line col-12"></div>
-    </div>
+    </ul>
   </div>
 </div>
 

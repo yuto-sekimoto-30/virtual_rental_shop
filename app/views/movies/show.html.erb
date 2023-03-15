@@ -1,12 +1,12 @@
-<div class="col-12 show-movie">
-  <div class="row pt-5">
+<div class="col-12 show-movie pt-4">
+  <div class="row">
     <% if false %>映画詳細表示<% end %>
-    <div class="col-6 mb-4">
+    <div class="col-6">
       <%= image_tag @movie['poster_path'], class: "card-img" %>
     </div>
     <div class="col-6">
-      <div class="row mr-1">
-        <h5 class="col-12 pb-3"><%= @movie['title'] %></h5>
+      <div class="row mr-2">
+        <h5 class="col-12 pb-2"><%= @movie['title'] %></h5>
         <p class="col-12"><%= @movie['overview'] %></p></p>
         <p class="col-12">
           <%= t '.like' %>
@@ -18,14 +18,34 @@
         </p>
         <p class="col-12"><%= link_to t('.to_review'), new_movie_tmdb_reviews_path(movie_id: @movie['id']) %></p>
         <% if !@movie['backdrop_path'].blank? %>
-          <%= image_tag @movie['backdrop_path'], class: "card-img mt-5" %>
+          <%= image_tag @movie['backdrop_path'], class: "card-img" %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if false %>レビュー一覧<% end %>
+    <div class="tmdb_reviews col-10 offset-1 pt-4 mt-4">
+      <h6>レビュー一覧</h6>
+      <div class="row mt-4">
+        <% @tmdb_reviews.each do |tmdb_review| %>
+          <div class="col-2">
+            <%= link_to image_tag(tmdb_review.user.avatar.url, class: "mb-1", size: '80x80'), user_path(tmdb_review.user) %>
+            <p><%= tmdb_review.user.name %></p>
+          </div>
+          <div class="tmdb_review col-10 mb-4 border d-flex align-items-center">
+            <div class="row">
+              <h6 class="col-12"><%= tmdb_review.title %></h6>
+              <p class="col-12"><%= tmdb_review.comment %></p>
+              </div>
+            </div>
         <% end %>
       </div>
     </div>
 
     <% if false %>コメント一覧<% end %>
-    <div class="tmdb_comments col-10 offset-1 pt-4 mb-2">
-      <div class="row">
+    <div class="tmdb_comments col-10 offset-1 pt-4 mt-4">
+    <h6>コメント一覧</h6>
+      <div class="row mt-4">
         <% @tmdb_comments.each do |tmdb_comment| %>
           <div class="col-2">
             <%= link_to image_tag(tmdb_comment.user.avatar.url, class: "rounded-circle", size: '80x80'), user_path(tmdb_comment.user) %>
