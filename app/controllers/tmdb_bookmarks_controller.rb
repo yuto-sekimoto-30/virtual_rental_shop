@@ -1,24 +1,18 @@
 class TmdbBookmarksController < ApplicationController
+  include TmdbKey
   before_action :require_login
-  require 'themoviedb-api'
-  Tmdb::Api.key("a345acb42340ca68939f4c241dc52adb")
-  Tmdb::Api.language("ja")
+  before_action :set_user, only: %i[index]
+  before_action :get_movie_data, only: %i[index]
 
   def index
-    if !params[:user_id].blank?
-      user_id = params[:user_id]
-    else
-      user_id = current_user.id
-    end
-    user = User.find(user_id)
-    @tmdb_bookmarks = user.tmdb_bookmarks
-    puts @tmdb_bookmarks.count
+    @tmdb_bookmarks = @user.tmdb_bookmarks
     @movies = []
     @tmdb_bookmarks.each do |tmdb_bookmark|
-      puts tmdb_bookmark.tmdb_id
       @movie = JSON.parse((Tmdb::Movie.detail(tmdb_bookmark.tmdb_id)).to_json)['table']
       @movies.push(@movie)
     end
+    p @movies
+    render layout: "profile"
   end
 
   def create
@@ -31,4 +25,15 @@ class TmdbBookmarksController < ApplicationController
     @tmdb_id = tmdb_bookmark.tmdb_id
     tmdb_bookmark.destroy!
   end
+
+  private
+  def set_user
+    if !params[:user_id].blank?
+      user_id = params[:user_id]
+    else
+      user_id = current_user.id
+    end
+    @user = User.find(user_id)
+  end
+
 end

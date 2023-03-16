@@ -1,13 +1,14 @@
 class MoviesController < ApplicationController
+  include TmdbKey
   skip_before_action :verify_authenticity_token
   before_action :require_login, only: %i[show]
   before_action :get_genre_array, only: %i[index]
   before_action :get_popular_movies, only: %i[index]
   before_action :set_form, only: %i[index]
-
-  require 'themoviedb-api'
-  Tmdb::Api.key("a345acb42340ca68939f4c241dc52adb")
-  Tmdb::Api.language("ja")
+  before_action :set_user, only: %i[show]
+  before_action :get_movie_data, only: %i[show]
+  before_action :get_tmdb_reviews, only: %i[show]
+  layout 'profile', only: %i[show]
 
   def tmdb_id
     tmdb_id = params[:tmdb_id]
@@ -40,17 +41,27 @@ class MoviesController < ApplicationController
     end
 
     #ジャンルが選択されていた場合にジャンルで絞る
-    if !params[:genre].blank?
+    if params[:genre].present?
       @search_movies.delete_if do |search_movie|
         !search_movie['table']['genre_ids'].include?(params[:genre].to_i)
       end
     end
   end
 
+  def genre_list
+    total_pages = JSON.parse(Tmdb::Genre.movies(params[:id]).to_json)['table']['total_pages']
+    total_pages = 500 if total_pages >= 500
+    @genre_movies = JSON.parse(Tmdb::Genre.movies(params[:id], page: rand(1..total_pages)).to_json)['table']['results']
+    6.times do
+      @genre_movies += JSON.parse(Tmdb::Genre.movies(params[:id], page: rand(1..total_pages)).to_json)['table']['results']
+    end
+    @genre_name = params[:name]
+  end
+
   def show
     @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)['table']
     if @movie['poster_path'].blank?
-      @movie['poster_path'] = "/assets/no_phone.jpg"
+      @movie['poster_path'] = "/images/no_phone.jpg"
     else
       @movie['poster_path'] = 'https://image.tmdb.org/t/p/w1280' + @movie['poster_path']
     end
@@ -71,16 +82,25 @@ class MoviesController < ApplicationController
       end
     end
 
-    #人気急上昇中の映画一覧を取得
+    # 人気急上昇中の映画一覧を取得
     def get_popular_movies
-      #人気映画取得
       @popular_movies = JSON.parse(Tmdb::Movie.popular.to_json)['table']['results']
     end
 
-    #フォーム初期値設定
+    # フォーム初期値設定
     def set_form
       @name = params[:name] || ""
       @type = params[:type] || 1
       @genre = params[:genre] || ""
+    end
+
+    # ユーザーを取得
+    def set_user
+      @user = User.find(current_user.id)
+    end
+
+    # レビュー一覧を取得
+    def get_tmdb_reviews
+      @tmdb_reviews = TmdbReview.where(tmdb_id: params[:id]).includes(:user)
     end
 end

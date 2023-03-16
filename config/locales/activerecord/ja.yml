@@ -4,15 +4,18 @@ ja:
       user: "ユーザー"
       admin_user: "管理者ユーザー"
       comment: "管理者コメント"
+      tmdb_review: "映画レビュー"
     attributes:
       user:
         id: "ID"
         name: "名前"
         email: "メールアドレス"
+        birth_date: "生年月日"
+        gender: "性別"
         password: "パスワード"
         password_confirmation: "パスワード確認"
         avatar: "画像"
-        introduction: "紹介文"
+        introduction: "紹介文(40文字以内)"
         created_at: "作成日時"
         updated_at: "更新日時"
       admin_user:
@@ -23,3 +26,16 @@ ja:
         password_confirmation: "パスワード確認"
         created_at: "作成日時"
         updated_at: "更新日時"
+      tmdb_review:
+        id: "ID"
+        rate: "レビュー"
+        title: "タイトル"
+        comment: "コメント"
+        end_date: "視聴終了日"
+        movie_state_name_id: "視聴状況"
+  enums:
+    user:
+      gender:
+        unanswered: 未回答
+        male: 男性
+        female: 女性

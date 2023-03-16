@@ -1,6 +1,14 @@
-.new{
+//ログイン画面
+.user-login{
   background-color: white;
 }
+.user-login h6{
+  border-bottom: 1px solid black;
+}
+.user-login .btn-block:hover{
+  text-decoration:underline;
+}
+
 .done{
   background-color: white;
 }

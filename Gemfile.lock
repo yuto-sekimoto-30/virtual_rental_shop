@@ -153,6 +153,8 @@ GEM
       dry-core (~> 0.5, >= 0.5)
       dry-initializer (~> 3.0)
       dry-schema (~> 1.8, >= 1.8.0)
+    enum_help (0.0.19)
+      activesupport (>= 3.0.0)
     erubi (1.12.0)
     execjs (2.8.1)
     faraday (2.7.4)
@@ -433,6 +435,7 @@ DEPENDENCIES
   carrierwave
   config
   devise
+  enum_help
   font-awesome-sass
   high_voltage
   jbuilder (~> 2.7)

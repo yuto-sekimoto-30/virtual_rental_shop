@@ -1,0 +1,24 @@
+<% if pages >= 1 %>
+  <div class="col-12 pagination mt-3 mb-3">
+    <p>
+      <% if false %>前へ表示<% end %>
+      <% if 1 != cp %>
+        <%= link_to t('defaults.pagination.to_before'), user_path(user, msnid: msnid, page: cp - 1), class: "mr-2" %>
+      <% end %>
+      <% if false %>ページネーション表示<% end %>
+      <% (fp...(mp + fp)).each do |page| %>
+        <% if page == cp %>
+          <%= page %>
+        <% else %>
+          <%= link_to page, user_path(user, msnid: msnid, page: page) %>
+        <% end %>
+      <% end %>
+      <% if false %>次へ表示<% end %>
+      <% if pages != cp %>
+        <%= link_to t('defaults.pagination.to_next'), user_path(user, msnid: msnid, page: cp + 1), class: "ml-2"  %>
+      <% end %>
+    </p>
+  </div>
+<% else %>
+  <p class="col-12">該当なし</p>
+<% end %>

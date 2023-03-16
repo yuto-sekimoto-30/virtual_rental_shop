@@ -1,22 +1,57 @@
-.profile{
-  background-color: white;
-}
-.profile .introduction{
-  border-top: 1px solid black;
-}
-.user-index{
-  background-color: white;
-}
-.user-edit{
-  background-color: white;
-}
+//ユーザー作成画面
 .user-new{
   background-color: white;
 }
-h5{
+.user-new h6{
   border-bottom: 1px solid black;
 }
-.profile img{
-  width: 100%;
+.user-new .btn-block:hover{
+  text-decoration:underline;
 }
 
+//マイページ
+.mypage{
+  border: double 5px #4ec4d3;
+}
+.mypage h5{
+  border-bottom: double 5px #4ec4d3;
+  font-weight: bold;
+}
+.mypage .pagination p{
+  font-size: 18px;
+  margin: 0 auto;
+}
+//プロフィール編集画面
+.user-edit{
+  border: double 5px #4ec4d3;
+}
+.user-edit h5{
+  border-bottom: double 5px #4ec4d3;
+  font-weight: bold;
+}
+.user-edit .form-group{
+  margin: 0;
+}
+.user-edit label{
+  background-color: whitesmoke;
+  border-right: 1px solid black;
+}
+.user-edit .form-inline{
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin: 0;
+}
+.user-edit .form-inline-last{
+  border-bottom: 1px solid black;
+}
+.user-edit .form-control{
+  border: 2px solid black;
+  border-radius: 0px;
+}
+.user-edit img{
+  border: 1px solid black;
+}
+.user-edit .btn-block:hover{
+  text-decoration:underline;
+}

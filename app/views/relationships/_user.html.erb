@@ -10,9 +10,9 @@
   <td class="align-middle">
     <%= user.introduction %>
   </td>
-  <% if @main_user.id == current_user.id %>
+  <% if @user.id == current_user.id %>
     <td class="align-middle">
-      <% if @main_user.relationships.find_by(followed_id: user.id) %>
+      <% if @user.relationships.find_by(followed_id: user.id) %>
         <%= render 'relationships/follow', followed_id: user.id %>
       <% else %>
         <%= render 'relationships/unfollow', followed_id: user.id %>

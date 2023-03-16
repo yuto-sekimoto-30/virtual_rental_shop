@@ -1,0 +1,45 @@
+// Place all the styles related to the tmdb_reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+//プロフィール編集画面
+.tmdb-review-new{
+  border: double 5px #4ec4d3;
+}
+.tmdb-review-new h5{
+  border-bottom: double 5px #4ec4d3;
+  font-weight: bold;
+}
+.tmdb-review-new .form-group{
+  margin: 0;
+}
+.tmdb-review-new label{
+  background-color: whitesmoke;
+  border-right: 1px solid black;
+}
+.tmdb-review-new .label-comment{
+  background-color: whitesmoke;
+  border-right: 1px solid black;
+  height: 240px;
+}
+.tmdb-review-new textarea{
+  height: 200px;
+}
+.tmdb-review-new .form-inline{
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin: 0;
+}
+.tmdb-review-new .form-inline-last{
+  border-bottom: 1px solid black;
+}
+.tmdb-review-new .form-control{
+  border: 2px solid black;
+  border-radius: 0px;
+}
+.tmdb-review-new img{
+  border: 1px solid black;
+}
+.tmdb-review-new .btn-block:hover{
+  text-decoration:underline;
+}

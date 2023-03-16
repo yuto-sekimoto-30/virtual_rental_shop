@@ -1,6 +1,7 @@
 .tmdb_bookmarks{
-  background-color: white;
+  border: double 5px #4ec4d3;
 }
-.tmdb_bookmarks h3{
-  border: none;
+.tmdb_bookmarks h5{
+  border-bottom: double 5px #4ec4d3;
+  font-weight: bold;
 }

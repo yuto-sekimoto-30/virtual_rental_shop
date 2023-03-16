@@ -1,0 +1,50 @@
+<div class="side-menu col-3">
+  <div class="row">
+    <div class="profile-image col-12 mt-4">
+      <%= image_tag asset_path(@user.avatar.url) %>
+      <ul class="mb-2">
+        <li><span class="mr-2"><%= User.human_attribute_name(:name) %></span><%= @user.name %></li>
+        <li><span class="mr-2"><%= User.human_attribute_name(:gender) %></span><%= @user.gender_i18n %></li>
+        <li><span class="mr-2"><%= User.human_attribute_name(:birth_date) %></span><%= l @user.birth_date %></li>
+        <li class="introduction mt-2"><%= @user.introduction %></li>
+        <li class="mt-2">
+          <% if @user != current_user %>
+            <%= t 'defaults.message.like_add' %>
+            <% if current_user.relationships.find_by(followed_id: @user.id) %>
+              <%= render 'relationships/follow', followed_id: @user.id %>
+            <% else %>
+              <%= render 'relationships/unfollow', followed_id: @user.id %>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <% if @user == current_user %>
+      <div class="profile-edit col-12 mt-2 mb-4">
+        <%= link_to t('users.edit.title'), edit_user_path(@user) %>
+      </div>
+    <% end %>
+    <div class="user-data col-12 mb-4">
+      <div class="user-record mb-3">
+        <h7><%= t 'defaults.side_menu.title_movie_data' %></h7>
+        <ul class="col-12">
+          <li>
+            <%= link_to t('defaults.side_menu.li_all') + "(#{@msnid_sum})", user_path(@user) %>
+          </li>
+          <% MovieStateName.all.each do |msn| %>
+            <li>
+              <%= link_to "#{msn.name}(#{@msnid_array[msn.id - 1]})", user_path(@user, msnid: msn.id) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="user-like">
+      <h7><%= t 'defaults.side_menu.title_like' %></h7>
+        <ul class="col-12">
+          <li><%= link_to t('defaults.movie'), tmdb_bookmarks_path(user_id: @user.id) %></li>
+          <li><%= link_to t('defaults.user'), relationships_path(user_id: @user.id) %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

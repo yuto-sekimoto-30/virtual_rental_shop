@@ -1,20 +1,22 @@
-<div class="row">
-  <div class="col-12 user-bookmark">
-    <h5 class="col-12 mt-3 mb-3 pb-2"><%= t '.title' %></h5>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th><%= User.human_attribute_name(:avatar) %></th>
-          <th><%= User.human_attribute_name(:name) %></th>
-          <th><%= User.human_attribute_name(:introduction) %></th>
-          <% if @main_user.id == current_user.id %>
-            <th><%= t 'defaults.bookmark' %></th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
+<div class="col-12 user-bookmark">
+  <h5 class="col-12 mt-3 mb-3 pb-3"><%= t '.title' %></h5>
+  <% if @users.present? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= User.human_attribute_name(:avatar) %></th>
+        <th><%= User.human_attribute_name(:name) %></th>
+        <th><%= User.human_attribute_name(:introduction) %></th>
+        <% if @user.id == current_user.id %>
+          <th><%= t 'defaults.bookmark' %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
       <%= render partial: "relationships/user", collection: @users %>
-      </tbody>
-    </table>
-  </div>
+    </tbody>
+  </table>
+  <% else %>
+    <p>該当なし</p>
+  <% end %>
 </div>

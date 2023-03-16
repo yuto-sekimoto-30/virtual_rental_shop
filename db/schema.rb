@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_22_062934) do
+ActiveRecord::Schema.define(version: 2023_03_01_173507) do
 
   create_table "active_admin_comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -37,6 +37,22 @@ ActiveRecord::Schema.define(version: 2022_12_22_062934) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "movie_state_names", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "movie_states", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "tmdb_id", null: false
+    t.bigint "movie_state_name_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_state_name_id"], name: "index_movie_states_on_movie_state_name_id"
+    t.index ["user_id"], name: "index_movie_states_on_user_id"
   end
 
   create_table "relationships", charset: "utf8mb4", force: :cascade do |t|
@@ -66,11 +82,27 @@ ActiveRecord::Schema.define(version: 2022_12_22_062934) do
     t.index ["user_id"], name: "index_tmdb_comments_on_user_id"
   end
 
+  create_table "tmdb_reviews", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "tmdb_id", null: false
+    t.float "rate", default: 0.0, null: false
+    t.string "title"
+    t.string "comment"
+    t.bigint "movie_state_name_id", null: false
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_state_name_id"], name: "index_tmdb_reviews_on_movie_state_name_id"
+    t.index ["user_id"], name: "index_tmdb_reviews_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"
+    t.date "birth_date"
+    t.integer "gender"
     t.string "avatar"
     t.text "introduction"
     t.datetime "created_at", precision: 6, null: false
@@ -83,8 +115,12 @@ ActiveRecord::Schema.define(version: 2022_12_22_062934) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
+  add_foreign_key "movie_states", "movie_state_names"
+  add_foreign_key "movie_states", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "tmdb_bookmarks", "users"
   add_foreign_key "tmdb_comments", "users"
+  add_foreign_key "tmdb_reviews", "movie_state_names"
+  add_foreign_key "tmdb_reviews", "users"
 end

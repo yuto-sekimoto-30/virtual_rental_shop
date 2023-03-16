@@ -8,23 +8,26 @@
 @import "tmdb_bookmarks";
 
 body{
-  background-image: image-url('digital.jpg');
-  background-size: 100% 100%;
+  background-color: whitesmoke;
+  font-size: 13px;
 }
 //利用規約,プライバシーポリシー
-.wrap{
-  color: white;
-}
 //ヘッダー
 header{
-  background-color: transparent;
+  background-color: rgb(143, 230, 231);
+  padding-top: 0;
+  margin-top: 0;
+  font-size: 10px;
+}
+header .navbar-brand{
+  margin-left: 15px;
 }
 header .nav-item{
   margin-right: 15px;
 }
 //フッター
 footer li {
-  border-right: 1px solid white;
+  border-right: 1px solid black;
   padding-right: 12px;
   padding-left: 6px;
 }
@@ -33,19 +36,12 @@ footer li:last-child {
 }
 footer .link {
   text-decoration: none;
-  color: white ;
+  color: black;
+}
+footer .copyright {
+  color: black;
 }
 footer {
   margin-top: auto;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-footer {
-  margin-top: auto;
-}
-.wrap ol{
-  list-style:none;
+  padding-top: 10px;
 }

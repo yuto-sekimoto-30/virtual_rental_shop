@@ -1,0 +1,105 @@
+@import "bootstrap";
+@import "font-awesome";
+@import "users";
+@import "tmdb_reviews";
+@import "relationships";
+@import "tmdb_bookmarks";
+@import "movies";
+
+//メイン
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 13px;
+}
+
+//サイドメニュー
+.side-menu{
+  border-radius: 5px;
+  text-align: left;
+  margin: 2em 0;
+  background: #d6ebff;
+  box-shadow: 0px 0px 0px 5px #d6ebff;
+  border: dashed 2px white;
+}
+.side-menu:after{
+  position: absolute;
+  content: '';
+  right: -7px;
+  top: -7px;
+  border-width: 0 15px 15px 0;
+  border-style: solid;
+  border-color: #d6ebff #fff #d6ebff;
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+.side-menu ul{
+  margin: 0;
+  padding: 0;
+}
+.side-menu li{
+  list-style: none;
+  font-size: 11px;
+  padding-left: 5px;
+}
+.side-menu h7{
+  font-weight: bold;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  display: block;
+  padding-left: 5px;
+  background: whitesmoke;
+}
+.side-menu img{
+  width: 100%;
+  max-width: 200px;
+  border: 1px solid black;
+}
+.side-menu .profile-image{
+  text-align: center;
+}
+.side-menu .profile-image img{
+  background-color: white;
+}
+.side-menu .profile-edit {
+  text-align: center;
+}
+.side-menu .user-data{
+  margin: 0;
+  padding: 0;
+}
+
+//ヘッダー
+header{
+  background-color: rgb(143, 230, 231);
+  padding-top: 0;
+  margin-top: 0;
+  font-size: 10px;
+}
+header .navbar-brand{
+  margin-left: 15px;
+}
+header .nav-item{
+  margin-right: 15px;
+}
+
+//フッター
+footer li {
+  border-right: 1px solid black;
+  padding-right: 12px;
+  padding-left: 6px;
+}
+footer li:last-child {
+  border: none;
+}
+footer .link {
+  text-decoration: none;
+  color: black;
+}
+footer .copyright {
+  color: black;
+}
+footer {
+  margin-top: auto;
+  padding-top: 10px;
+}

@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   resources :tmdb_bookmarks, only: %i[index create destroy]
   resources :movies do
     resources :tmdb_comments, only: %i[edit update create destroy]
+    resource :tmdb_reviews
   end
   resources :movies, only: %i[index show create]
+  get 'genre_list', to: 'movies#genre_list'
   post 'movies/tmdb_id', to: 'movies#tmdb_id'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'  # 追記
   delete 'logout', to: 'user_sessions#destroy'  # 追記
   root to: 'movies#index'
-  resources :users, only: %i[show new edit create update]
+  resources :users, only: %i[index show new edit create update]
   resources :password_resets, only: %i[new create edit update]
   get 'password_resets/done', to: 'password_resets#done'
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

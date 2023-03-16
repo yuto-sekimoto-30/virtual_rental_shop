@@ -18,8 +18,17 @@ ja:
     copyright: "© 2022 Copyright"
     message:
       require_login: "ログインしてください"
-      like: "お気に入りに追加："
-      email: "メールアドレス："
+      like_add: "お気に入りに追加："
+    side_menu:
+      title_movie_data: "映画データ"
+      title_myrank: "マイランキング"
+      title_like: "お気に入り"
+      li_all: "全て"
+      top_movies_10: "トップ映画10"
+      worst_movies_10: "ワースト映画10"
+    pagination:
+      to_before: "前へ"
+      to_next: "次へ"
   users:
     new:
       title: "アカウント作成"
@@ -31,10 +40,8 @@ ja:
       title: "ユーザー一覧"
     show:
       title: "マイページ"
-      profile: "プロフィール"
-      to_edit: "編集画面へ"
     edit:
-      title: "ユーザー編集"
+      title: "プロフィール編集"
     update:
       success: "ユーザー情報を編集しました"
       fail: "ユーザー情報の編集に失敗しました"
@@ -49,6 +56,22 @@ ja:
     destroy:
       title: "ログアウト"
       success: "ログアウトしました"
+  tmdb_reviews:
+    new:
+      title: "レビュー作成"
+      review: "レビューを投稿"
+    edit:
+      title: "レビュー更新"
+      update: "レビューを投稿"
+      destroy: "レビューを削除"
+    create:
+      success: "レビューを作成しました"
+      fail: "レビューの作成に失敗しました"
+    update:
+      success: "レビューを更新しました"
+      fail: "レビューの更新に失敗しました"
+    destroy:
+      success: "レビューを削除しました"
   password_resets:
     new:
       title: "パスワードをお忘れの場合"
@@ -83,8 +106,13 @@ ja:
       form_link: "ランダム表示"
       modal_link: "詳細画面へ"
       popular_title: "人気急上昇中"
+      genre_list_title: "ジャンル一覧"
     show:
       title: "映画詳細"
+      like: "お気に入りに追加："
+      to_review: "レビューをする"
+    genre_list:
+      title: "ジャンル一覧"
     search:
       title: "映画検索"
   relationships:
