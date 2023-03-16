@@ -18,9 +18,9 @@
             <div class="row">
               <% 12.times do %>
                 <% break if @search_movies[i].blank? %>
-                <% search_movie = @search_movies[i]['table']%>
+                <% search_movie = @search_movies[i]['table'] %>
                 <div class="movie col-1 mt-4 d-flex">
-                <div class="top"></div>
+                  <div class="top"></div>
                   <div class="ftop pt-1">
                     <% release_date = search_movie['release_date'].blank? ? Date.today : search_movie['release_date'] %>
                   </div>

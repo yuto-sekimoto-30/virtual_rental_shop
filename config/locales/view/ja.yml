@@ -18,6 +18,7 @@ ja:
     copyright: "© 2022 Copyright"
     message:
       require_login: "ログインしてください"
+      like_add: "お気に入りに追加："
     side_menu:
       title_movie_data: "映画データ"
       title_myrank: "マイランキング"

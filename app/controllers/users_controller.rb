@@ -8,12 +8,6 @@ class UsersController < ApplicationController
   before_action :get_movie_data, only: %i[show edit update]
   layout 'profile', only: %i[show edit update]
 
-  def index
-    @users = User.all
-    puts @users.class
-    @users = @users.page(params[:page]).per(10)
-  end
-
   def show; end
   def new; end
 
@@ -25,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
-      redirect_to users_path, success: t('.success')
+      redirect_to root_path, success: t('.success')
     else
       flash.now[:danger] = t '.fail'
       render :new
