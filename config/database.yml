@@ -53,14 +53,14 @@ test:
 #   username: virtual_rental_shop
 #   password: <%= ENV['VIRTUAL_RENTAL_SHOP_DATABASE_PASSWORD'] %>
 
-# production:
-#   <<: *default
-#   adapter: postgresql
-#   encoding: unicode
-#   pool: 5
 production:
   <<: *default
-  database: virtual_rental_shop_production
-  username: root
-  password: toyu3007
-  socket: /var/lib/mysql/mysql.sock
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+# production:
+#   <<: *default
+#   database: virtual_rental_shop_production
+#   username: root
+#   password: toyu3007
+#   socket: /var/lib/mysql/mysql.sock
