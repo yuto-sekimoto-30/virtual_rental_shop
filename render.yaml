@@ -1,0 +1,21 @@
+databases:
+  - name: virtual_rental_shop_DB
+    databaseName: virtual_rental_shop_db
+    user: Renderで作成したRailsのアプリ名
+    region: singapore
+
+services:
+  - type: web
+    name: virtual_rental_shop
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: virtual_rental_shop
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
